@@ -1,3 +1,3 @@
--   version control
 -   real url
 -   meta data page stuff
+-   Clean up main.js with helper files

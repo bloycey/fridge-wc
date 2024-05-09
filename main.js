@@ -5,20 +5,27 @@ import { supabase } from "./src/db/supabase";
 
 supabase.auth.onAuthStateChange((event, session) => {
 	if (event === "INITIAL_SESSION") {
-		const user = session.user
-		const userEmail = session.user.email;
-		setTimeout(async () => {
-			// Check if user exists
-			const { data, error } = await supabase.from("users").select()
+		if (session) {
+			console.log("original session", session)
+			const user = session.user
+			const userEmail = session.user.email;
+			setTimeout(async () => {
+				// Check if user exists
+				const { data, error } = await supabase.from("users").select()
 
-			if (data.length === 0) {
-				// If user does not exist, create user
+				if (data.length === 0) {
+					// If user does not exist, create user
 
-				const { data: createData, error: createError } = await supabase
-					.from("users")
-					.insert({ email: user.email, name: user.user_metadata.name, households: [user.email], image: user.user_metadata.avatar_url, activeHousehold: user.email }).select()
-			}
-		}, 0)
+					const { data: createData, error: createError } = await supabase
+						.from("users")
+						.insert({ email: user.email, name: user.user_metadata.name, households: [user.email], image: user.user_metadata.avatar_url, activeHousehold: user.email }).select()
+				}
+
+				// Refresh token
+				const { data: refreshedSessionData, error: refreshSessionError } = await supabase.auth.refreshSession()
+				console.log("refreshed data", refreshedSessionData)
+			}, 0)
+		}
 	}
 })
 
@@ -26,19 +33,35 @@ const history = createBrowserHistory();
 const location = history.location;
 const app = document.querySelector('#app')
 
+export const navigate = path => {
+	history.push(path)
+	render(path)
+}
+
 const checkSessionForAuth = async () => {
 	const { data, error } = await supabase.auth.getSession()
-	if (!data.session) {
-		// TODO: Refresh the session??
-		window.location.href = "/"
+	if (!data.session && window.location.pathname !== "/") {
+		navigate("/")
 	}
-	localStorage.setItem("FRIDGE_USER", JSON.stringify(data.session.user.user_metadata))
+	if (data.session) {
+		localStorage.setItem("FRIDGE_USER", JSON.stringify(data.session.user.user_metadata))
+		return true
+	} else {
+		return false
+	}
 }
 
 const routes = [
 	{
 		path: '',
-		action: () => /*html*/`<fridge-page-index></fridge-page-index>`
+		async action() {
+			const hasActiveSession = await checkSessionForAuth()
+			if (hasActiveSession) {
+				navigate("/home")
+			} else {
+				return /*html*/`<fridge-page-index></fridge-page-index>`
+			}
+		}
 	},
 	{
 		path: '/home',
@@ -82,7 +105,6 @@ const routes = [
 ]
 
 const router = new UniversalRouter(routes)
-
 
 export const render = (pathname) => {
 	router.resolve(pathname).then(html => {
