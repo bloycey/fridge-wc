@@ -17,7 +17,7 @@ export default class Home extends HTMLElement {
 
 	buildHTML() {
 		return withNav(/*html*/`
-				<h1>Home</h1>
+				<fridge-settings-bar></fridge-settings-bar>
 				<button class="sign-out">Sign Out</button>
 			`)
 	}

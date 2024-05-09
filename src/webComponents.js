@@ -12,6 +12,7 @@ import "./pages/tasks"
 
 import "./components/mainNav"
 import "./components/mainNavItem"
+import "./components/settingsBar"
 
 
 // ICONS //
@@ -21,3 +22,4 @@ import "./components/icons/iconShoppingCart"
 import "./components/icons/iconNote"
 import "./components/icons/iconMoney"
 import "./components/icons/iconClipboard"
+import "./components/icons/iconCog"

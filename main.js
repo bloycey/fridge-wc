@@ -4,8 +4,22 @@ import { createBrowserHistory } from 'history';
 import { supabase } from "./src/db/supabase";
 
 supabase.auth.onAuthStateChange((event, session) => {
-	console.log("event", event)
-	console.log("session", session)
+	if (event === "INITIAL_SESSION") {
+		const user = session.user
+		const userEmail = session.user.email;
+		setTimeout(async () => {
+			// Check if user exists
+			const { data, error } = await supabase.from("users").select()
+
+			if (data.length === 0) {
+				// If user does not exist, create user
+
+				const { data: createData, error: createError } = await supabase
+					.from("users")
+					.insert({ email: user.email, name: user.user_metadata.name, households: [user.email], image: user.user_metadata.avatar_url, activeHousehold: user.email }).select()
+			}
+		}, 0)
+	}
 })
 
 const history = createBrowserHistory();
@@ -18,6 +32,7 @@ const checkSessionForAuth = async () => {
 		// TODO: Refresh the session??
 		window.location.href = "/"
 	}
+	localStorage.setItem("FRIDGE_USER", JSON.stringify(data.session.user.user_metadata))
 }
 
 const routes = [
@@ -68,7 +83,6 @@ const routes = [
 
 const router = new UniversalRouter(routes)
 
-console.log("state??", router)
 
 export const render = (pathname) => {
 	router.resolve(pathname).then(html => {
@@ -79,8 +93,6 @@ export const render = (pathname) => {
 let unlisten = history.listen(({ location, action }) => {
 	render(location.pathname);
 });
-
-render(location.pathname);
 
 const isExternalPath = path => /^https?:\/\//.test(path);
 
@@ -102,3 +114,6 @@ app.addEventListener('click', event => {
 	event.preventDefault()
 	history.push(link);
 });
+
+checkSessionForAuth()
+render(location.pathname);
