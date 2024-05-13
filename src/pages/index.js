@@ -13,7 +13,7 @@ export default class Index extends HTMLElement {
 			const { data, error } = await supabase.auth.signInWithOAuth({
 				provider: 'google',
 				options: {
-					redirectTo: "http://localhost:5173/home",
+					redirectTo: "http://localhost:5173/home/",
 					queryParams: {
 						prompt: 'select_account'
 					},

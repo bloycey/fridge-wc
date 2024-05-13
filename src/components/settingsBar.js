@@ -1,7 +1,9 @@
+import { supabase } from "../db/supabase";
+
 export default class SettingsBar extends HTMLElement {
 	constructor() {
 		super();
-		this.innerHTML = this.buildHTML();
+		this.buildHTML();
 	}
 
 	get userName() {
@@ -13,17 +15,28 @@ export default class SettingsBar extends HTMLElement {
 	}
 
 	buildHTML() {
-		return /*html*/`
+		const HTML = () => /*html*/`
 			<a href="/settings" class="text-darkest-green flex block bg-light-green rounded-full p-1.5 space-between items-center">
 				<div class="flex-1 flex items-center">
 					<img src="${this.userImage}" alt="${this.userName}" referrerpolicy="no-referrer" class="rounded-full w-10 h-10"/>
-					<p class="ml-3">House name here</p>
+					<p class="ml-3">${this.householdData.name}</p>
 				</div>
 				<heroicon-cog class-names="w-6 h-6 mr-2 text-darkest-green"></heroicon-cog>
 			</a>
 		`
+
+		const localHouseholdData = JSON.parse(localStorage.getItem("FRIDGE_HOUSEHOLD"));
+		if (localHouseholdData) {
+			this.householdData = localHouseholdData;
+			this.innerHTML = HTML();
+		} else {
+			supabase.from("households").select().then(results => {
+				this.householdData = results.data[0];
+				localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(results.data[0]))
+				this.innerHTML = HTML();
+			})
+		}
 	}
-	// <CogOutline classes="w-6 h-6 mr-2 text-darkest-green"/> */} */}
 }
 
 if (!customElements.get("fridge-settings-bar")) {

@@ -7,18 +7,9 @@ export default class Home extends HTMLElement {
 		this.innerHTML = this.buildHTML();
 	}
 
-	connectedCallback() {
-		const signOutBtn = this.querySelector(".sign-out");
-		signOutBtn.addEventListener("click", async () => {
-			await supabase.auth.signOut();
-			window.location.href = "/";
-		})
-	}
-
 	buildHTML() {
 		return withNav(/*html*/`
 				<fridge-settings-bar></fridge-settings-bar>
-				<button class="sign-out">Sign Out</button>
 			`)
 	}
 }

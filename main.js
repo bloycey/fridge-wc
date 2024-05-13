@@ -6,7 +6,7 @@ import { supabase } from "./src/db/supabase";
 supabase.auth.onAuthStateChange((event, session) => {
 	if (event === "INITIAL_SESSION") {
 		if (session) {
-			console.log("original session", session)
+			// console.log("original session", session)
 			const user = session.user
 			const userEmail = session.user.email;
 			setTimeout(async () => {
@@ -18,7 +18,13 @@ supabase.auth.onAuthStateChange((event, session) => {
 
 					const { data: createData, error: createError } = await supabase
 						.from("users")
-						.insert({ email: user.email, name: user.user_metadata.name, households: [user.email], image: user.user_metadata.avatar_url, activeHousehold: user.email }).select()
+						.insert({ email: user.email, name: user.user_metadata.name, households: [user.email], image: user.user_metadata.avatar_url }).select()
+
+					const { data: householdData, error: householdsError } = await supabase
+						.from("households")
+						.insert({ name: `${user.user_metadata.name}'s Fridge`, ownerName: user.user_metadata.name }).select()
+
+					localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(householdData))
 				}
 
 				// Refresh token
@@ -57,7 +63,7 @@ const routes = [
 		async action() {
 			const hasActiveSession = await checkSessionForAuth()
 			if (hasActiveSession) {
-				navigate("/home")
+				navigate("/home/")
 			} else {
 				return /*html*/`<fridge-page-index></fridge-page-index>`
 			}
@@ -96,6 +102,20 @@ const routes = [
 		async action() {
 			await checkSessionForAuth()
 			return /*html*/`<fridge-page-tasks></fridge-page-tasks>`
+		}
+	},
+	{
+		path: '/settings',
+		async action() {
+			await checkSessionForAuth()
+			return /*html*/`<fridge-page-settings></fridge-page-settings>`
+		}
+	},
+	{
+		path: '/settings/active_fridge',
+		async action() {
+			await checkSessionForAuth()
+			return /*html*/`<fridge-page-active-fridge></fridge-page-active-fridge>`
 		}
 	},
 	{

@@ -6,6 +6,8 @@ import "./pages/lists"
 import "./pages/notes"
 import "./pages/bills"
 import "./pages/tasks"
+import "./pages/settings"
+import "./pages/settings/activeFridge"
 
 
 // COMPONENTS //
@@ -13,6 +15,9 @@ import "./pages/tasks"
 import "./components/mainNav"
 import "./components/mainNavItem"
 import "./components/settingsBar"
+import "./components/settingsNavItem"
+import "./components/settingsNav"
+import "./components/backBar"
 
 
 // ICONS //
@@ -23,3 +28,8 @@ import "./components/icons/iconNote"
 import "./components/icons/iconMoney"
 import "./components/icons/iconClipboard"
 import "./components/icons/iconCog"
+import "./components/icons/iconBack"
+import "./components/icons/iconSignOut"
+import "./components/icons/iconFridge"
+import "./components/icons/iconList"
+import "./components/icons/iconUsers"
