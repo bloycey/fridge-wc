@@ -9,6 +9,8 @@ export default class Settings extends HTMLElement {
 	connectedCallback() {
 		const signOutBtn = this.querySelector(".sign-out");
 		signOutBtn.addEventListener("click", async () => {
+			localStorage.removeItem("FRIDGE_USER");
+			localStorage.removeItem("FRIDGE_HOUSEHOLD");
 			await supabase.auth.signOut();
 			window.location.href = "/";
 		})

@@ -3,16 +3,10 @@ import { debounce } from "../helpers/debounce";
 import { getHouseholdData, getUserData } from "../helpers/data";
 
 export default class FridgeName extends HTMLElement {
-	static observedAttributes = ["fridge-name"];
-
 	constructor() {
 		super();
 		this.householdData = getHouseholdData();
 		this.userData = getUserData();
-	}
-
-	attributeChangedCallback() {
-		this.buildHTML();
 	}
 
 	connectedCallback() {

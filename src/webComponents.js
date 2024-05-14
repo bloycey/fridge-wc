@@ -23,6 +23,7 @@ import "./components/modal"
 import "./components/button"
 import "./components/inviteFamilyModal"
 import "./components/fridgeMembers"
+import "./components/fridgeMemberCard"
 
 
 // ICONS //

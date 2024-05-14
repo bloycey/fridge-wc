@@ -19,12 +19,20 @@ export default class FridgeMembers extends HTMLElement {
 			return;
 		}
 
-		// Maybe get their full data too?
-		// https://www.reddit.com/r/Supabase/comments/16nqje4/rls_based_on_if_a_user_has_a_entry_in_a_table/
 		const emails = invitationData.map(invitation => invitation.invited);
+		const { data: realUsers, error: realUsersError } = await supabase.from("users").select().in('email', emails);
+
+		const renderUserCard = (email) => {
+			const actualUser = realUsers.find(user => user.email === email);
+			const name = actualUser ? actualUser.name : "No account yet";
+
+			return `<li><fridge-member-card email="${email}" name="${name}"></fridge-member-card></li>`
+		}
+
+		// TODO: Include current user in here.
 		this.innerHTML = /*html*/ `
 			<ul class="rounded-md overflow-hidden list-none bg-light-green py-3">
-				${emails.map(email => `<li>${email}</li>`).join("")}
+				${emails.map(email => renderUserCard(email)).join("")}
 			</ul>
 		`
 	}
