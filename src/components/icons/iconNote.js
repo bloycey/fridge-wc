@@ -7,6 +7,9 @@ export default class HeroIconNote extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

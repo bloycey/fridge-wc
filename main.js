@@ -6,7 +6,6 @@ import { supabase } from "./src/db/supabase";
 supabase.auth.onAuthStateChange((event, session) => {
 	if (event === "INITIAL_SESSION") {
 		if (session) {
-			// console.log("original session", session)
 			const user = session.user
 			const userEmail = session.user.email;
 			setTimeout(async () => {
@@ -29,7 +28,6 @@ supabase.auth.onAuthStateChange((event, session) => {
 
 				// Refresh token
 				const { data: refreshedSessionData, error: refreshSessionError } = await supabase.auth.refreshSession()
-				console.log("refreshed data", refreshedSessionData)
 			}, 0)
 		}
 	}
@@ -50,7 +48,7 @@ const checkSessionForAuth = async () => {
 		navigate("/")
 	}
 	if (data.session) {
-		localStorage.setItem("FRIDGE_USER", JSON.stringify(data.session.user.user_metadata))
+		localStorage.setItem("FRIDGE_USER", JSON.stringify({ ...data.session.user.user_metadata, id: data.session.user.id }))
 		return true
 	} else {
 		return false
@@ -116,6 +114,13 @@ const routes = [
 		async action() {
 			await checkSessionForAuth()
 			return /*html*/`<fridge-page-active-fridge></fridge-page-active-fridge>`
+		}
+	},
+	{
+		path: '/settings/your_fridge',
+		async action() {
+			await checkSessionForAuth()
+			return /*html*/`<fridge-page-your-fridge></fridge-page-your-fridge>`
 		}
 	},
 	{

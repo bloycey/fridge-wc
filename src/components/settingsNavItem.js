@@ -3,6 +3,9 @@ export default class SettingsNavItem extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

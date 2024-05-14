@@ -7,6 +7,9 @@ export default class HeroIconShoppingCart extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

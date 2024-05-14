@@ -1,7 +1,10 @@
 export default class MainNav extends HTMLElement {
 	constructor() {
 		super();
-		this.innerHTML = this.buildHTML();
+	}
+
+	connectedCallback() {
+		this.buildHTML();
 	}
 
 	isActive(path) {
@@ -9,7 +12,7 @@ export default class MainNav extends HTMLElement {
 	}
 
 	buildHTML() {
-		return /*html*/ `
+		this.innerHTML = /*html*/ `
 			<nav class="main-nav h-16 bg-white drop-shadow-[0_35px_35px_rgba(0,0,0,0.60)] fixed bottom-0 left-0 right-0">
 				<div class="flex main-nav">
 					<fridge-main-nav-item url="/home/" text="Home" icon-name="home" active=${this.isActive("/home/")}></fridge-main-nav-item>

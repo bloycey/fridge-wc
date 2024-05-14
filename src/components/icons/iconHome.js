@@ -7,6 +7,9 @@ export default class HeroIconHome extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

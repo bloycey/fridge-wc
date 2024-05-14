@@ -3,6 +3,9 @@ import { supabase } from "../db/supabase";
 export default class SettingsBar extends HTMLElement {
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

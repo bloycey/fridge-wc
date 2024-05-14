@@ -8,7 +8,7 @@ import "./pages/bills"
 import "./pages/tasks"
 import "./pages/settings"
 import "./pages/settings/activeFridge"
-
+import "./pages/settings/yourFridge"
 
 // COMPONENTS //
 
@@ -18,6 +18,11 @@ import "./components/settingsBar"
 import "./components/settingsNavItem"
 import "./components/settingsNav"
 import "./components/backBar"
+import "./components/fridgeNameUpdater"
+import "./components/modal"
+import "./components/button"
+import "./components/inviteFamilyModal"
+import "./components/fridgeMembers"
 
 
 // ICONS //
@@ -33,3 +38,4 @@ import "./components/icons/iconSignOut"
 import "./components/icons/iconFridge"
 import "./components/icons/iconList"
 import "./components/icons/iconUsers"
+import "./components/icons/iconPlane"

@@ -7,6 +7,9 @@ export default class FridgeIcon extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

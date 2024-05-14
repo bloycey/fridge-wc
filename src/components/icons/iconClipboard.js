@@ -7,6 +7,9 @@ export default class HeroIconClipboard extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

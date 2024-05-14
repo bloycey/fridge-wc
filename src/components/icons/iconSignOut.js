@@ -7,7 +7,10 @@ export default class HeroIconSignOut extends HTMLElement {
 
 	constructor() {
 		super();
-		this.innerHTML = this.buildHTML();
+	}
+
+	connectedCallback() {
+		this.buildHTML();
 	}
 
 	get classNames() {

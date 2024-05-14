@@ -7,6 +7,9 @@ export default class HeroIconCog extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 

@@ -7,6 +7,9 @@ export default class HeroIconMoney extends HTMLElement {
 
 	constructor() {
 		super();
+	}
+
+	connectedCallback() {
 		this.buildHTML();
 	}
 
