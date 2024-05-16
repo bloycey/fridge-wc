@@ -1,6 +1,7 @@
 import photo from "../images/photo_sketch.svg";
 import bill from "../images/bills_sketch.svg";
 import notes from "../images/notes_sketch.svg";
+import logo from "../images/logo_white.svg";
 
 import { supabase } from "../db/supabase";
 
@@ -47,7 +48,7 @@ export default class Index extends HTMLElement {
 					</section>
 					<section class="absolute top-1/3 left-0 right-0">
 						<div class="flex items-center justify-center">
-							<img src="src/images/logo_white.svg" alt="Logo">
+							<img src="${logo}" alt="Logo">
 						</div>
 						<div class="text-center border-b-2 border-pink">
 							<p class="inline-block translate-y-1/2 px-4 bg-dark-green text-pink text-lg">Just put it on the fridge!</p>
