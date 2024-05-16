@@ -6,14 +6,13 @@ export default class Index extends HTMLElement {
 		this.innerHTML = this.buildHTML();
 	}
 
-	// TODO: Actual URL here
 	connectedCallback() {
 		const googleBtn = this.querySelector(".btn-google");
 		googleBtn.addEventListener("click", async () => {
 			const { data, error } = await supabase.auth.signInWithOAuth({
 				provider: 'google',
 				options: {
-					redirectTo: "http://localhost:5173/home/",
+					redirectTo: import.meta.env.DEV ? "http://localhost:5173/home/" : "https://onthefridge.lol/home/",
 					queryParams: {
 						prompt: 'select_account'
 					},
