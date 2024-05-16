@@ -1,8 +1,10 @@
 import { supabase } from "../db/supabase";
+import { loadFromCache, addToCache } from "../helpers/cache";
 
 export default class SettingsBar extends HTMLElement {
 	constructor() {
 		super();
+		loadFromCache(this);
 	}
 
 	connectedCallback() {
@@ -39,6 +41,7 @@ export default class SettingsBar extends HTMLElement {
 				this.innerHTML = HTML();
 			})
 		}
+		addToCache(this);
 	}
 }
 

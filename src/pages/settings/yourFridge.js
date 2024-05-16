@@ -13,8 +13,11 @@ export default class YourFridge extends HTMLElement {
 			<div class="mt-6">
 				<fridge-name-updater></fridge-name-updater>
 			</div>
-			<fridge-members></fridge-members>
-			<fridge-invite-family-modal></fridge-invite-family-modal>
+			<section class="mt-8">
+				<p>Household Members</p>
+				<fridge-members id="fridge-members"></fridge-members>
+				<fridge-invite-family-modal></fridge-invite-family-modal>
+			</section>
 		</div>`
 	}
 }

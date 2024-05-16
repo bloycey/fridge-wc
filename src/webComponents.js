@@ -24,6 +24,8 @@ import "./components/button"
 import "./components/inviteFamilyModal"
 import "./components/fridgeMembers"
 import "./components/fridgeMemberCard"
+import "./components/fridgeSelector"
+import "./components/fridgeSelectorCard"
 
 
 // ICONS //
@@ -40,3 +42,4 @@ import "./components/icons/iconFridge"
 import "./components/icons/iconList"
 import "./components/icons/iconUsers"
 import "./components/icons/iconPlane"
+import "./components/icons/iconTrash"

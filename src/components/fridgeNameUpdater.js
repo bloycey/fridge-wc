@@ -15,6 +15,7 @@ export default class FridgeName extends HTMLElement {
 		input.addEventListener("input", debounce((e) => {
 			supabase.from("households").update({ name: e.target.value }).eq('id', this.userData.id).select().then(result => {
 				if (!result.error) {
+					// TODO: Some feedback that it's worked
 					localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(result.data[0]))
 				}
 			})

@@ -10,20 +10,21 @@ export default class InviteFamily extends HTMLElement {
 	connectedCallback() {
 		this.buildHTML();
 		const form = this.querySelector("#send-invite");
+		const modal = this.querySelector("#invite-family-modal");
 		const emailInput = this.querySelector("#invite-link");
 		const sendInviteBtn = this.querySelector("#send-invite-btn");
+		const membersList = document.querySelector('fridge-members');
 
 		// TODO: Remove event listener on disconnect
-		sendInviteBtn.addEventListener("click", (e) => {
+		sendInviteBtn.addEventListener("click", async (e) => {
 			e.preventDefault();
 			const email = emailInput.value;
-			supabase.from("invitations").insert({ invited: email, invited_by: this.userData.id }).select().then(result => {
-				console.log(result)
-				// Do a flash alert
-				// Make it fun like the youtube subscribe button
-				form.reset();
-				// Refresh the members list component
-			})
+			const { data, error } = await supabase.from("invitations").insert({ invited: email, invited_by: this.userData.id }).select()
+
+			sendInviteBtn.reset();
+			form.reset();
+			modal.closeModal();
+			membersList.buildHTML();
 		})
 	}
 

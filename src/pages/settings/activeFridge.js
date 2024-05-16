@@ -12,9 +12,7 @@ export default class ActiveFridge extends HTMLElement {
 			<h1 class="text-5xl">Active Fridge</h1>
 			<div class="mt-6 mb-8">
 				<p class="mb-1">Select your active fridge:</p>
-				<zap-frame src="/partials/fridge_selector" cacheId="fridge-selector">
-					<div class="h-[76px] rounded-md bg-light-green animate-pulse"></div>
-				</zap-frame>
+				<fridge-active-fridge-selector id="active-fridge-selector"></fridge-active-fridge-selector>
 			</div>
 		</div>
 			`

@@ -9,7 +9,7 @@ export default class Home extends HTMLElement {
 
 	buildHTML() {
 		return withNav(/*html*/`
-				<fridge-settings-bar></fridge-settings-bar>
+				<fridge-settings-bar id="settings-bar"></fridge-settings-bar>
 			`)
 	}
 }

@@ -1,11 +1,12 @@
 import { supabase } from "../db/supabase";
 import { getUserData } from "../helpers/data";
+import { addToCache, loadFromCache } from "../helpers/cache";
 
 export default class FridgeMembers extends HTMLElement {
 	constructor() {
 		super();
 		this.userData = getUserData();
-		// TODO: Insert loading state here to be overridden by buildHTML
+		loadFromCache(this);
 	}
 
 	connectedCallback() {
@@ -29,12 +30,14 @@ export default class FridgeMembers extends HTMLElement {
 			return `<li><fridge-member-card email="${email}" name="${name}"></fridge-member-card></li>`
 		}
 
-		// TODO: Include current user in here.
 		this.innerHTML = /*html*/ `
 			<ul class="rounded-md overflow-hidden list-none bg-light-green py-3">
+				<li><fridge-member-card email="${this.userData.email}" name="${this.userData.name}" is-admin="true"></fridge-member-card></li>
 				${emails.map(email => renderUserCard(email)).join("")}
 			</ul>
 		`
+
+		addToCache(this);
 	}
 }
 
