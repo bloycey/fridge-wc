@@ -1,3 +1,7 @@
+import photo from "../images/photo_sketch.svg";
+import bill from "../images/bills_sketch.svg";
+import notes from "../images/notes_sketch.svg";
+
 import { supabase } from "../db/supabase";
 
 export default class Index extends HTMLElement {
@@ -30,15 +34,15 @@ export default class Index extends HTMLElement {
 					<section class="inline-block relative w-full">
 						<div class="absolute top-0 right-[3rem] animate-subtle-bounce">
 							<p class="pill-accent translate-y-[1.5rem] -translate-x-[3.5rem]">Photos</p>
-							<img src="src/images/photo_sketch.svg" alt="Sketch of a photograph">
+							<img src="${photo}" alt="Sketch of a photograph">
 						</div>
 						<div class="absolute top-[5rem] right-[8.5rem] animate-subtle-bounce" style="animation-delay: 0.3s">
 							<p class="pill-accent translate-y-[0.75rem] -translate-x-[2.25rem]">Bills</p>
-							<img src="src/images/bills_sketch.svg" alt="Sketch of a bill">
+							<img src="${bill}" alt="Sketch of a bill">
 						</div>
 						<div class="notes-sketch absolute top-[6rem] right-[2rem] animate-subtle-bounce" style="animation-delay: 0.66s">
 							<p class="pill-accent translate-y-[5.25rem] -translate-x-[2.5rem]">Notes</p>
-							<img src="src/images/notes_sketch.svg" alt="Sketch of notes">
+							<img src="${notes}" alt="Sketch of notes">
 						</div>
 					</section>
 					<section class="absolute top-1/3 left-0 right-0">
