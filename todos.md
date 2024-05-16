@@ -6,3 +6,4 @@
 -   Code that needs to be run every time the component is added/removed from the DOM should be put in connectedCallback and disconnectedCallback.
 -   Make it an PWA (manifest file etc)
 -   https://www.npmjs.com/package/@ionic/core
+-   Tidy up components with folders
