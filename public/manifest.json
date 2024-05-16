@@ -1,0 +1,16 @@
+{
+	"name": "The Fridge",
+	"icons": [
+		{
+			"src": "/icons/maskable_icon_x512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "maskable"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#08453F",
+	"theme_color": "#F36E86",
+	"orientation": "portrait-primary"
+}
