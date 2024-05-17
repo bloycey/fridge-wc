@@ -2,6 +2,12 @@
 	"name": "The Fridge",
 	"icons": [
 		{
+			"src": "/icons/maskable_icon_x128.png",
+			"type": "image/png",
+			"sizes": "128x128",
+			"purpose": "any"
+		},
+		{
 			"src": "/icons/maskable_icon_x512.png",
 			"type": "image/png",
 			"sizes": "512x512",

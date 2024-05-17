@@ -8,3 +8,5 @@
 -   Host the thing on netlify
 -   https://www.npmjs.com/package/@ionic/core
 -   Tidy up components with folders
+-   https://web.dev/articles/app-shortcuts
+-   https://www.pwabuilder.com/
