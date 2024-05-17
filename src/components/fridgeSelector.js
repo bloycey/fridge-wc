@@ -6,6 +6,8 @@ export default class FridgeSelector extends HTMLElement {
 	constructor() {
 		super();
 		this.userData = getUserData();
+
+		// TODO: This kinds sucks, maybe a regular loading instead of the skeleton?
 		this.innerHTML = /*html*/ `
 			<div class="space-y-2">
 				<div class="block bg-light-green animate-pulse h-16 rounded-md"></div>
