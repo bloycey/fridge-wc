@@ -14,9 +14,15 @@
 			"purpose": "maskable"
 		}
 	],
-	"start_url": "/",
+	"start_url": "/home/",
 	"display": "standalone",
 	"background_color": "#08453F",
 	"theme_color": "#F36E86",
-	"orientation": "portrait-primary"
+	"orientation": "portrait-primary",
+	"short_name": "The Fridge",
+	"id": "the-fridge-app",
+	"description": "An app for couples, families, and sharehouses. Keep things organised with shared shopping lists, notes, tasks, and bills.",
+	"dir": "ltr",
+	"lang": "en",
+	"categories": ["lifestyle", "productivity", "social", "utilities"]
 }
