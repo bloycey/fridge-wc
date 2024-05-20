@@ -267,3 +267,17 @@ strong {
 fridge-note {
 	display: block;
 }
+
+.grid-bg {
+	background-size: 20px 20px;
+	background-image: linear-gradient(to right, #e6e6e6 1px, transparent 1px),
+		linear-gradient(to bottom, #e6e6e6 1px, transparent 1px);
+}
+
+.screen-content {
+	height: calc(100vh - 64px);
+}
+
+.new-note-content {
+	height: calc(100vh - 144px);
+}

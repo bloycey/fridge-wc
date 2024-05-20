@@ -12,6 +12,10 @@ supabase.auth.onAuthStateChange((event, session) => {
 				// Check if user exists
 				const { data, error } = await supabase.from("users").select()
 
+				if (error) {
+					navigate("/404")
+				}
+
 				if (data.length === 0) {
 					// If user does not exist, create user
 
@@ -44,6 +48,10 @@ export const navigate = path => {
 
 const checkSessionForAuth = async () => {
 	const { data, error } = await supabase.auth.getSession()
+	if (error) {
+		console.log(error)
+		navigate("/404")
+	}
 	if (!data.session && window.location.pathname !== "/") {
 		navigate("/")
 	}
@@ -86,6 +94,13 @@ const routes = [
 		async action() {
 			await checkSessionForAuth()
 			return /*html*/`<fridge-page-notes></fridge-page-notes>`
+		}
+	},
+	{
+		path: '/new-note',
+		async action() {
+			await checkSessionForAuth()
+			return /*html*/`<fridge-page-new-note></fridge-page-new-note>`
 		}
 	},
 	{

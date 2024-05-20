@@ -10,3 +10,5 @@
 -   Tidy up components with folders
 -   https://web.dev/articles/app-shortcuts
 -   https://www.pwabuilder.com/
+- Use motion.dev to make the modal silky smooth
+- Make inputs nicer

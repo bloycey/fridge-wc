@@ -206,6 +206,10 @@ export default class Modal extends HTMLElement {
 		return this.getAttribute("autoLaunch") || "false"
 	}
 
+	get fullScreen() {
+		return this.getAttribute("fullScreen") || "false"
+	}
+
 	showModal() {
 		this.shadowRoot.querySelector('dialog').showModal()
 	}
@@ -240,6 +244,12 @@ export default class Modal extends HTMLElement {
 
 		if (this.displayCloseIcon === "false") {
 			$(".close-icon-wrapper").style.display = "none"
+		}
+
+		if (this.fullScreen === "true") {
+			$("dialog").style.height = "100vh"
+			$("dialog").style.borderRadius = "0"
+			$("dialog").style.margin = "0"
 		}
 
 		$("slot[name='trigger']").addEventListener("click", () => {
