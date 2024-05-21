@@ -281,3 +281,11 @@ fridge-note {
 .new-note-content {
 	height: calc(100vh - 144px);
 }
+
+input[name="note-style"]:checked + div {
+	@apply border-green;
+}
+
+input[name="note-style"]:checked + div heroicon-check-circle {
+	@apply inline-block;
+}

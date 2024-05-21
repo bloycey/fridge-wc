@@ -1,4 +1,5 @@
 import { withNav } from "../layouts/withNav";
+import { withLayoutPreview } from "../layouts/withLayoutPreview";
 import scribble from "../images/fridge-scribble.svg"
 
 export default class NewNote extends HTMLElement {
@@ -31,21 +32,16 @@ export default class NewNote extends HTMLElement {
 							</li>
 						</ul>
 					</nav>
-					<div class="zap-tab-content p-6 new-note-content" id="layout">
-						<ul class="list-none space-y-6">
+					<div class="zap-tab-content new-note-content" id="layout">
+						<ul class="list-none space-y-4 p-6">
 							<li>
-								<article>
-									<h1 class="text-3xl mb-2">This is an optional title</h1>
-									<p class="mb-4">Remember, a note is just some text on a page right? It doesn’t necessarily need a  card or a divider or anything.</p>
-									<img src="${scribble}" alt="Decorative scribble" />
-								</article>
+								${withLayoutPreview('<fridge-note-1 heading="This is an optional title" body="Remember, a note is just some text on a page right? It doesn’t necessarily need a  card or a divider or anything."></fridge-note-1>', 'style-1', true)}
 							</li>
 							<li>
-								<article>
-									<div class="relative">
-										<h1 class="before:content-[''] before:size-8 before:inline-block before:absolute before:top-0 before:-left-3 before:bg-bright-pink before:rounded-full before:z-[-1] text-[48px] z-50">This note is short.</h1>
-									</div>
-								</article>
+								${withLayoutPreview('<fridge-note-2 heading="This note is short."></fridge-note-2>', 'style-2', false)}
+							</li>
+							<li>
+								${withLayoutPreview('<fridge-note-3 heading="A traditional style note" body="This note has a heading, and some body text, and is a reasonably short length. Like most notes."></fridge-note-3>', 'style-3', false)}
 							</li>
 						</ul>
 					</div>
