@@ -3,11 +3,11 @@ import { withNav } from "../layouts/withNav";
 export default class Lists extends HTMLElement {
 	constructor() {
 		super();
-		this.innerHTML = this.buildHTML();
+		this.buildHTML();
 	}
 
 	buildHTML() {
-		return withNav(/*html*/`
+		this.innerHTML = withNav(/*html*/`
 				<h1>Lists</h1>
 			`)
 	}

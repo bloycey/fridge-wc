@@ -3,11 +3,11 @@ export default class BackBar extends HTMLElement {
 
 	constructor() {
 		super();
-		this.innerHTML = this.buildHTML();
+		this.buildHTML();
 	}
 
 	attributeChangedCallback() {
-		this.innerHTML = this.buildHTML();
+		this.buildHTML();
 	}
 
 	get link() {
@@ -20,7 +20,7 @@ export default class BackBar extends HTMLElement {
 	}
 
 	buildHTML() {
-		return /*html*/ `
+		this.innerHTML =  /*html*/ `
 			<a href="${this.link}" class="bg-green block flex space-x-4 p-4 text-white">
 				<heroicon-back class-names="w-5 h-5"></heroicon-back>
 				<p>${this.text}</p>

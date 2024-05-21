@@ -1,11 +1,22 @@
 import { withNav } from "../layouts/withNav";
-import { withLayoutPreview } from "../layouts/withLayoutPreview";
+import { withRadioCard } from "../layouts/withRadioCard";
 import scribble from "../images/fridge-scribble.svg"
 
 export default class NewNote extends HTMLElement {
 	constructor() {
 		super();
 		this.innerHTML = this.buildHTML();
+	}
+
+	connectedCallback() {
+		const styleRadios = this.querySelectorAll("input[name='note-style']");
+		const noteEditor = this.querySelector("fridge-new-note-editor");
+		styleRadios.forEach(radio => {
+			radio.addEventListener("change", (e) => {
+				this.selectedStyle = e.target.value;
+				noteEditor.setAttribute("note-style", this.selectedStyle);
+			})
+		})
 	}
 
 	buildHTML() {
@@ -33,21 +44,10 @@ export default class NewNote extends HTMLElement {
 						</ul>
 					</nav>
 					<div class="zap-tab-content new-note-content" id="layout">
-						<ul class="list-none space-y-4 p-6">
-							<li>
-								${withLayoutPreview('<fridge-note-1 heading="This is an optional title" body="Remember, a note is just some text on a page right? It doesn’t necessarily need a  card or a divider or anything."></fridge-note-1>', 'style-1', true)}
-							</li>
-							<li>
-								${withLayoutPreview('<fridge-note-2 heading="This note is short."></fridge-note-2>', 'style-2', false)}
-							</li>
-							<li>
-								${withLayoutPreview('<fridge-note-3 heading="A traditional style note" body="This note has a heading, and some body text, and is a reasonably short length. Like most notes."></fridge-note-3>', 'style-3', false)}
-							</li>
-						</ul>
+						<fridge-new-note-layouts></fridge-new-note-layouts>
 					</div>
 					<div class="zap-tab-content hidden p-6 new-note-content" id="write">
-						<p>Write content here</p>
-						<fridge-note-editor></fridge-note-editor>
+						<fridge-new-note-editor note-style="style-1"></fridge-new-note-editor>
 					</div>
 					<div class="zap-tab-content hidden p-6 new-note-content" id="preview">
 						<p>Preview content here</p>
