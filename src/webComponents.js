@@ -13,6 +13,8 @@ import "./pages/settings/yourFridge"
 
 // COMPONENTS //
 
+import "./components/forms/textInput"
+import "./components/forms/textArea"
 import "./components/mainNav"
 import "./components/mainNavItem"
 import "./components/settingsBar"
@@ -31,6 +33,7 @@ import "./components/tabs"
 import "./components/newNote/layouts"
 import "./components/newNote/editor"
 import "./components/notes/style1"
+import "./components/notes/style1Edit"
 import "./components/notes/style2"
 import "./components/notes/style3"
 

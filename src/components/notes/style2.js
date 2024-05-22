@@ -24,6 +24,6 @@ export default class NoteStyle2 extends HTMLElement {
 	}
 }
 
-if (!customElements.get("fridge-note-2")) {
-	customElements.define("fridge-note-2", NoteStyle2);
+if (!customElements.get("fridge-note-style-2")) {
+	customElements.define("fridge-note-style-2", NoteStyle2);
 }

@@ -162,59 +162,6 @@ main.splash-screen {
 	height: 100dvh;
 }
 
-/* FORMS */
-
-.form-wrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-
-.label-plus-input label {
-	display: block;
-	margin-bottom: 0.25rem;
-}
-
-.label-plus-input input {
-	width: 100%;
-}
-
-.form-wrapper button[type="submit"] {
-	margin-top: 1.5rem;
-}
-
-input[type="text"]:not(.unstyled),
-input[type="email"]:not(.unstyled),
-input[type="password"]:not(.unstyled) {
-	background-color: rgba(255, 255, 255, 0.4);
-	border: 1px solid rgba(255, 255, 255, 0.7);
-	height: 60px;
-	border-radius: 0.5rem;
-	padding: 1rem;
-	color: var(--black);
-}
-
-input[type="text"]:focus:not(.unstyled),
-input[type="email"]:focus:not(.unstyled),
-input[type="password"]:focus:not(.unstyled) {
-	background-color: rgba(255, 255, 255, 0.7);
-}
-
-/* label {
-	font-variation-settings: "wght" 550;
-} */
-
-input[type="text"].green,
-input[type="email"].green {
-	background-color: var(--light-green);
-	color: var(--darkest-green);
-}
-
-input:focus:not(.unstyled) {
-	outline: none;
-	@apply ring ring-green;
-}
-
 /* NAV */
 
 .main-nav {

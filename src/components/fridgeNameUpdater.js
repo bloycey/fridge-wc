@@ -25,7 +25,7 @@ export default class FridgeName extends HTMLElement {
 	buildHTML() {
 		this.innerHTML = /*html*/ `
 			<label for="house-name">Your Fridge Name</label>
-			<input type="text" id="house-name" class="green w-full" value="${this.householdData.name}">
+			<input type="text" id="house-name" class="bg-light-green rounded-md w-full px-5 py-4 focus-visible:outline-none focus-visible:ring-green focus-visible:ring-2" value="${this.householdData.name}">
 		`
 	}
 }

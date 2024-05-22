@@ -30,6 +30,6 @@ export default class NoteStyle1 extends HTMLElement {
 	}
 }
 
-if (!customElements.get("fridge-note-1")) {
-	customElements.define("fridge-note-1", NoteStyle1);
+if (!customElements.get("fridge-note-style-1")) {
+	customElements.define("fridge-note-style-1", NoteStyle1);
 }

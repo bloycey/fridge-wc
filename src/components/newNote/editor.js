@@ -16,8 +16,8 @@ export default class Editor extends HTMLElement {
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
-				<h1>${this.noteStyle}</h1>
-			`
+			<fridge-note-${this.noteStyle}-edit></fridge-note-${this.noteStyle}-edit>
+		`
 	}
 }
 

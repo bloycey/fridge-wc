@@ -29,6 +29,6 @@ export default class NoteStyle3 extends HTMLElement {
 	}
 }
 
-if (!customElements.get("fridge-note-3")) {
-	customElements.define("fridge-note-3", NoteStyle3);
+if (!customElements.get("fridge-note-style-3")) {
+	customElements.define("fridge-note-style-3", NoteStyle3);
 }
