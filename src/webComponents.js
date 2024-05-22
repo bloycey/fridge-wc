@@ -32,11 +32,11 @@ import "./components/fridgeSelectorCard"
 import "./components/tabs"
 import "./components/newNote/layouts"
 import "./components/newNote/editor"
+import "./components/newNote/preview"
 import "./components/notes/style1"
 import "./components/notes/style1Edit"
 import "./components/notes/style2"
 import "./components/notes/style3"
-
 
 // ICONS //
 

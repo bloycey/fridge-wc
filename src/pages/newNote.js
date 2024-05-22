@@ -49,8 +49,8 @@ export default class NewNote extends HTMLElement {
 					<div class="zap-tab-content hidden p-6 new-note-content" id="write">
 						<fridge-new-note-editor note-style="style-1"></fridge-new-note-editor>
 					</div>
-					<div class="zap-tab-content hidden p-6 new-note-content" id="preview">
-						<p>Preview content here</p>
+					<div class="zap-tab-content hidden p-4 new-note-content" id="preview">
+						<fridge-new-note-preview note-style="style-1"></fridge-new-note-preview>
 					</div>
 				</zap-tabs>
 			</div>

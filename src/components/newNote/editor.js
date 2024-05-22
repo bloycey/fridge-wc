@@ -6,6 +6,20 @@ export default class Editor extends HTMLElement {
 		this.buildHTML();
 	}
 
+	connectedCallback() {
+		const titleInput = this.querySelector("fridge-text-input input");
+		const contentInput = this.querySelector("fridge-textarea textarea");
+		const preview = document.querySelector("fridge-new-note-preview");
+
+		titleInput.addEventListener("input", (e) => {
+			preview.setAttribute("heading", e.target.value);
+		})
+
+		contentInput.addEventListener("input", (e) => {
+			preview.setAttribute("body", e.target.value);
+		})
+	}
+
 	attributeChangedCallback() {
 		this.buildHTML();
 	}

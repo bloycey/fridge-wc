@@ -7,7 +7,7 @@ export default class NoteStyle1Edit extends HTMLElement {
 	buildHTML() {
 		this.innerHTML =  /*html*/ `
 			<div class="space-y-6">
-				<fridge-text-input label="Note Title" id="note-title" name="note-title"></fridge-text-input>
+				<fridge-text-input label="Note Title" id="note-title" name="note-title" required="false"></fridge-text-input>
 				<fridge-textarea label="Note Content" id="note-content" name="note-content"></fridge-textarea>
 			</div>`
 	}

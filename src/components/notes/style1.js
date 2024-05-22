@@ -25,7 +25,7 @@ export default class NoteStyle1 extends HTMLElement {
 			<article class="p-6">
 				${this.heading ? `<h1 class="text-3xl mb-2">${this.heading}</h1>` : ""}
 				<p class="mb-4">${this.body}</p>
-				<img src="${scribble}" alt="Decorative scribble" />
+				<img src="${scribble}" alt="Decorative scribble" class="w-full" />
 			</article>`
 	}
 }
