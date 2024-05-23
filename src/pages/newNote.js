@@ -10,6 +10,16 @@ export default class NewNote extends HTMLElement {
 		this.buildHTML();
 	}
 
+	connectedCallback() {
+		const newNoteForm = this.querySelector("#new-note-form");
+		newNoteForm.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const formData = new FormData(newNoteForm);
+			const data = Object.fromEntries(formData.entries());
+			console.log(data);
+		})
+	}
+
 	get heading() {
 		return this.getAttribute("heading") || "";
 	}
@@ -38,7 +48,8 @@ export default class NewNote extends HTMLElement {
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
-			<div class="">
+			<fridge-back-bar link="/notes/" text="Back to notes"></fridge-back-bar>
+			<form id="new-note-form">
 				<zap-tabs activeTabClasses="border-green" inactiveTabClasses="border-light-green" activeContentClasses="block" inactiveContentClasses="hidden">
 					<nav class="text-darkest-green">
 						<ul class="list-none flex items-center">
@@ -70,23 +81,22 @@ export default class NewNote extends HTMLElement {
 						<fridge-new-note-preview note-style="style-1"></fridge-new-note-preview>
 					</div>
 				</zap-tabs>
-			</div>
-			<div class="h-20 flex p-6 space-x-2 items-center">
-				<a href="/notes/" class="btn-tertiary flex-1 close-btn" type="button">
-				Cancel
-				</a>
-				<button is="zap-button" class="btn-green flex-1" type="submit" id="new-note-btn">
-					Save Note
-				</button>
-			</div>
-
-			`
+			</form>`
 	}
 }
 
 if (!customElements.get("fridge-page-new-note")) {
 	customElements.define("fridge-page-new-note", NewNote);
 }
+
+{/* <div class="h-20 flex p-6 space-x-2 items-center">
+<a href="/notes/" class="btn-tertiary flex-1 close-btn" type="button">
+Cancel
+</a>
+<button is="zap-button" class="btn-green flex-1" type="submit" id="new-note-btn">
+	Save Note
+</button>
+</div> */}
 
 {/* <button is="zap-button" busyText="${this.data.id ? "Updating Note" : "Saving Note"}" class="btn-green flex-1" type="submit" id="new-note-btn">
 ${this.data.id ? "Update Note" : "Save Note"}

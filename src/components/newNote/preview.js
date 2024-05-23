@@ -48,6 +48,9 @@ export default class Preview extends HTMLElement {
 		} else {
 			this.innerHTML = /*html*/`
 				<fridge-note-${this.noteStyle} ${this.hasHeading() ? `heading="${this.heading}"` : ""} ${this.hasBody() ? `body="${this.body}"` : ""}></fridge-note-${this.noteStyle}>
+				<div class="flex justify-end">
+					<input type="submit" value="Save Note" class="btn-green">
+				</div>
 			`
 		}
 	}
