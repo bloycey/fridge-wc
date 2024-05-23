@@ -36,6 +36,7 @@ import "./components/newNote/preview"
 import "./components/notes/style1"
 import "./components/notes/style1Edit"
 import "./components/notes/style2"
+import "./components/notes/style2Edit"
 import "./components/notes/style3"
 
 // ICONS //

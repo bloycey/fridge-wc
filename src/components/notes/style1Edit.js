@@ -1,6 +1,12 @@
 export default class NoteStyle1Edit extends HTMLElement {
+	static observedAttributes = ["heading"];
+
 	constructor() {
 		super();
+		this.buildHTML();
+	}
+
+	attributeChangedCallback() {
 		this.buildHTML();
 	}
 
@@ -18,11 +24,19 @@ export default class NoteStyle1Edit extends HTMLElement {
 		})
 	}
 
+	get heading() {
+		return this.getAttribute("heading") || "";
+	}
+
+	get body() {
+		return this.getAttribute("body") || "";
+	}
+
 	buildHTML() {
 		this.innerHTML =  /*html*/ `
 			<div class="space-y-6">
-				<fridge-text-input label="Note Title" id="note-title" name="note-title" required="false"></fridge-text-input>
-				<fridge-textarea label="Note Content" id="note-content" name="note-content"></fridge-textarea>
+				<fridge-text-input label="Note Title" id="note-title" name="note-title" required="false" value="${this.heading}"></fridge-text-input>
+				<fridge-textarea label="Note Content" id="note-content" name="note-content" value="${this.body}"></fridge-textarea>
 			</div>`
 	}
 }

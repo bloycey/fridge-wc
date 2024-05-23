@@ -10,6 +10,18 @@ export default class NewNote extends HTMLElement {
 		this.buildHTML();
 	}
 
+	get heading() {
+		return this.getAttribute("heading") || "";
+	}
+
+	get body() {
+		return this.getAttribute("body") || "";
+	}
+
+	get noteStyle() {
+		return this.getAttribute("note-style") || "style-1";
+	}
+
 	// carefully update the bits that need to be updated
 	attributeChangedCallback(name, oldValue, newValue) {
 		const noteEditor = this.querySelector("fridge-new-note-editor");

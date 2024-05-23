@@ -10,13 +10,21 @@ export default class Editor extends HTMLElement {
 		this.buildHTML();
 	}
 
+	get heading() {
+		return this.getAttribute("heading") || "";
+	}
+
+	get body() {
+		return this.getAttribute("body") || "";
+	}
+
 	get noteStyle() {
 		return this.getAttribute("note-style") || "";
 	}
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
-			<fridge-note-${this.noteStyle}-edit></fridge-note-${this.noteStyle}-edit>
+			<fridge-note-${this.noteStyle}-edit heading="${this.heading}" body="${this.body}"></fridge-note-${this.noteStyle}-edit>
 		`
 	}
 }

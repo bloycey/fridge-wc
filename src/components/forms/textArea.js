@@ -26,11 +26,15 @@ export default class TextArea extends HTMLElement {
 		return this.getAttribute("rows") || "8";
 	}
 
+	get value() {
+		return this.getAttribute("value") || "";
+	}
+
 	buildHTML() {
 		this.innerHTML =  /*html*/ `
 			<div>
 				<label for="${this.id}" class="block mb-1">${this.label}</label>
-				<textarea rows="${this.rows}" name="${this.name}" id="${this.id}" class="bg-light-green rounded-md w-full px-5 py-4 focus-visible:outline-none focus-visible:ring-green focus-visible:ring-2"></textarea>
+				<textarea rows="${this.rows}" name="${this.name}" id="${this.id}" class="bg-light-green rounded-md w-full px-5 py-4 focus-visible:outline-none focus-visible:ring-green focus-visible:ring-2">${this.value}</textarea>
 			</div>`
 		this.classList.add("block")
 	}
