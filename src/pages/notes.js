@@ -8,12 +8,11 @@ export default class Notes extends HTMLElement {
 	}
 
 	async buildHTML() {
-		const notes = await getNotesData();
 		this.innerHTML = /*html*/`
 			<div class="grid-bg screen-content">
 				${withNav(/*html*/ `
 					<h1>Notes</h1>
-					<p>${JSON.stringify(notes)}</p>
+					<div id="notes"></div>
 				`)}
 				<a href="/new-note" class="btn-primary !rounded-full fixed right-2 bottom-[72px] new-note-trigger">
 					<heroicon-add class-names="w-6 h-6"></heroicon-add>
@@ -22,6 +21,9 @@ export default class Notes extends HTMLElement {
 					</span>
 				</a>
 			</div>`
+		const notes = await getNotesData();
+		const notesContainer = this.querySelector("#notes");
+		notesContainer.innerHTML = JSON.stringify(notes);
 	}
 }
 
