@@ -4,6 +4,20 @@ export default class NoteStyle1Edit extends HTMLElement {
 		this.buildHTML();
 	}
 
+	connectedCallback() {
+		const titleInput = this.querySelector("input");
+		const contentInput = this.querySelector("textarea");
+		const newNoteWrapper = document.querySelector("fridge-page-new-note");
+
+		titleInput.addEventListener("input", (e) => {
+			newNoteWrapper.setAttribute("heading", e.target.value);
+		})
+
+		contentInput.addEventListener("input", (e) => {
+			newNoteWrapper.setAttribute("body", e.target.value);
+		})
+	}
+
 	buildHTML() {
 		this.innerHTML =  /*html*/ `
 			<div class="space-y-6">

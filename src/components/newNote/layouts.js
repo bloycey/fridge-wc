@@ -6,6 +6,16 @@ export default class Layouts extends HTMLElement {
 		this.buildHTML();
 	}
 
+	connectedCallback() {
+		const newNoteWrapper = document.querySelector("fridge-page-new-note");
+		const styleRadios = this.querySelectorAll("input[name='note-style']");
+		styleRadios.forEach(radio => {
+			radio.addEventListener("change", (e) => {
+				newNoteWrapper.setAttribute("note-style", e.target.value);
+			})
+		})
+	}
+
 	buildHTML() {
 		this.innerHTML = /*html*/`
 		<ul class="list-none space-y-4 p-6">

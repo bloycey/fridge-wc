@@ -3,24 +3,24 @@ import { withRadioCard } from "../layouts/withRadioCard";
 import scribble from "../images/fridge-scribble.svg"
 
 export default class NewNote extends HTMLElement {
+	static observedAttributes = ["heading", "body", "note-style"];
+
 	constructor() {
 		super();
-		this.innerHTML = this.buildHTML();
+		this.buildHTML();
 	}
 
-	connectedCallback() {
-		const styleRadios = this.querySelectorAll("input[name='note-style']");
+	// carefully update the bits that need to be updated
+	attributeChangedCallback(name, oldValue, newValue) {
 		const noteEditor = this.querySelector("fridge-new-note-editor");
-		styleRadios.forEach(radio => {
-			radio.addEventListener("change", (e) => {
-				this.selectedStyle = e.target.value;
-				noteEditor.setAttribute("note-style", this.selectedStyle);
-			})
-		})
+		const preview = document.querySelector("fridge-new-note-preview");
+
+		noteEditor.setAttribute(name, newValue);
+		preview.setAttribute(name, newValue);
 	}
 
 	buildHTML() {
-		return /*html*/`
+		this.innerHTML = /*html*/`
 			<div class="">
 				<zap-tabs activeTabClasses="border-green" inactiveTabClasses="border-light-green" activeContentClasses="block" inactiveContentClasses="hidden">
 					<nav class="text-darkest-green">
