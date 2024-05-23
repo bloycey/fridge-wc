@@ -11,3 +11,4 @@
 -   https://www.pwabuilder.com/
 -   Use motion.dev to make the modal silky smooth
 -   Make inputs nicer
+-   Stop prematurely optimising with local storage, just get the data each time, it's fine.

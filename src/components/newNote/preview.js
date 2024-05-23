@@ -44,11 +44,11 @@ export default class Preview extends HTMLElement {
 
 	buildHTML() {
 		if (this.hasMissingRequiredFields()) {
-			this.innerHTML = /*html*/`<p>Write your post first, and then come back here to preview!</p>`
+			this.innerHTML = /*html*/`<p class="p-2">Write your post first, and then come back here to preview!</p>`
 		} else {
 			this.innerHTML = /*html*/`
 				<fridge-note-${this.noteStyle} ${this.hasHeading() ? `heading="${this.heading}"` : ""} ${this.hasBody() ? `body="${this.body}"` : ""}></fridge-note-${this.noteStyle}>
-				<div class="flex justify-end">
+				<div class="flex justify-end mt-4">
 					<input type="submit" value="Save Note" class="btn-green">
 				</div>
 			`

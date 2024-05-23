@@ -26,7 +26,7 @@ export default class NoteStyle2Edit extends HTMLElement {
 	buildHTML() {
 		this.innerHTML =  /*html*/ `
 			<div class="space-y-6">
-				<fridge-text-input label="Note Title" id="note-title" name="note-title" value="${this.heading}"></fridge-text-input>
+				<fridge-text-input label="Note Title" id="note-title" name="heading" value="${this.heading}"></fridge-text-input>
 			</div>`
 	}
 }

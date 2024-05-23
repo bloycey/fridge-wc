@@ -1,5 +1,8 @@
+import { supabase } from "../db/supabase"
 import { withNav } from "../layouts/withNav";
 import { withRadioCard } from "../layouts/withRadioCard";
+import { getUserData, getHouseholdData } from "../helpers/data";
+import { navigate } from "../../main"
 import scribble from "../images/fridge-scribble.svg"
 
 export default class NewNote extends HTMLElement {
@@ -8,15 +11,25 @@ export default class NewNote extends HTMLElement {
 	constructor() {
 		super();
 		this.buildHTML();
+		this.householdData = getHouseholdData();
+		this.userData = getUserData();
 	}
 
 	connectedCallback() {
 		const newNoteForm = this.querySelector("#new-note-form");
-		newNoteForm.addEventListener("submit", (e) => {
+		newNoteForm.addEventListener("submit", async (e) => {
 			e.preventDefault();
 			const formData = new FormData(newNoteForm);
 			const data = Object.fromEntries(formData.entries());
-			console.log(data);
+			console.log(data)
+			console.log(this.userData, this.householdData)
+			const { error } = await supabase.from("notes").insert({ heading: data.heading, text: data.text, household: this.householdData.id, author: this.userData.name, style: data.style })
+			if (error) {
+				console.error(error)
+			}
+			navigate("/notes/")
+			// Get all notes and add to localStorage
+			// heading, text, household, author (name), style
 		})
 	}
 
