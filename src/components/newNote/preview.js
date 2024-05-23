@@ -22,14 +22,32 @@ export default class Preview extends HTMLElement {
 		return this.getAttribute("body") || false;
 	}
 
+	hasHeading() {
+		return this.heading && this.heading !== "";
+	}
+
+	hasBody() {
+		return this.body && this.body !== "";
+	}
+
+	requiresHeadingOrBody() {
+		return this.noteStyle === "style-1" || this.noteStyle === "style-3";
+	}
+
+	requiresHeadingOnly() {
+		return this.noteStyle === "style-2";
+	}
+
+	hasMissingRequiredFields() {
+		return (this.requiresHeadingOrBody() && (!this.hasHeading() || !this.hasBody())) || (this.requiresHeadingOnly() && !this.hasHeading());
+	}
+
 	buildHTML() {
-		if (!this.heading && !this.body) {
-			this.innerHTML = /*html*/`
-				<p>Write your post first, and then come back here to preview!</p>
-			`
+		if (this.hasMissingRequiredFields()) {
+			this.innerHTML = /*html*/`<p>Write your post first, and then come back here to preview!</p>`
 		} else {
 			this.innerHTML = /*html*/`
-				<fridge-note-${this.noteStyle} ${this.heading ? `heading="${this.heading}"` : ""} ${this.body ? `body="${this.body}"` : ""}></fridge-note-${this.noteStyle}>
+				<fridge-note-${this.noteStyle} ${this.hasHeading() ? `heading="${this.heading}"` : ""} ${this.hasBody() ? `body="${this.body}"` : ""}></fridge-note-${this.noteStyle}>
 			`
 		}
 	}

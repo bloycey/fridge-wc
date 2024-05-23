@@ -27,7 +27,12 @@ export default class NewNote extends HTMLElement {
 		const noteEditor = this.querySelector("fridge-new-note-editor");
 		const preview = document.querySelector("fridge-new-note-preview");
 
-		noteEditor.setAttribute(name, newValue);
+		if (name === "note-style" && newValue === "style-3") {
+			noteEditor.setAttribute("note-style", "style-1");
+		} else {
+			noteEditor.setAttribute(name, newValue);
+		}
+
 		preview.setAttribute(name, newValue);
 	}
 
