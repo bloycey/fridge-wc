@@ -21,7 +21,7 @@ export default class SettingsBar extends HTMLElement {
 
 	buildHTML() {
 		const HTML = () => /*html*/`
-			<a href="/settings" class="text-darkest-green flex block bg-light-green rounded-full p-1.5 space-between items-center">
+			<a href="/settings" class="text-darkest-green flex block bg-light-green rounded-full p-1.5 space-between items-center m-2">
 				<div class="flex-1 flex items-center">
 					<img src="${this.userImage}" alt="${this.userName}" referrerpolicy="no-referrer" class="rounded-full w-10 h-10"/>
 					<p class="ml-3">${this.householdData.name}</p>

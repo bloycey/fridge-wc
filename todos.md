@@ -12,3 +12,6 @@
 -   Use motion.dev to make the modal silky smooth
 -   Make inputs nicer
 -   Stop prematurely optimising with local storage, just get the data each time, it's fine.
+-   Note editing / Deleting (Long press to edit)
+-   Image notes (with supabase storage)
+-   Favicon
