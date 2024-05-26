@@ -29,6 +29,6 @@ export default class Editor extends HTMLElement {
 	}
 }
 
-if (!customElements.get("fridge-new-note-editor")) {
-	customElements.define("fridge-new-note-editor", Editor);
+if (!customElements.get("fridge-note-editor")) {
+	customElements.define("fridge-note-editor", Editor);
 }

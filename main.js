@@ -97,6 +97,13 @@ const routes = [
 		}
 	},
 	{
+		path: '/note/:id',
+		async action(context) {
+			await checkSessionForAuth()
+			return /*html*/`<fridge-page-create-edit-note note-id="${context.params.id}"></fridge-page-create-edit-note>`
+		}
+	},
+	{
 		path: '/new-note',
 		async action() {
 			await checkSessionForAuth()

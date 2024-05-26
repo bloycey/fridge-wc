@@ -1,4 +1,5 @@
 import { supabase } from "../../db/supabase";
+import { loadFromCache, addToCache } from "../../helpers/cache";
 
 export default class Notes extends HTMLElement {
 	constructor() {
@@ -7,6 +8,7 @@ export default class Notes extends HTMLElement {
 	}
 
 	async buildHTML() {
+		loadFromCache(this);
 		const { data: notes, error } = await supabase.from("notes").select();
 		if (error) {
 			console.error(error);
@@ -14,10 +16,13 @@ export default class Notes extends HTMLElement {
 
 		this.innerHTML = /*html*/`
 			<div id="notes">
-				${notes.map((note) => /*html*/`
-					<fridge-note-${note.style} heading="${note.heading}" body="${note.text}"></fridge-note-${note.style}>
-				`).join("")}
+				${notes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((note) => /*html*/`
+					<a href="/note/${note.id}">
+						<fridge-note-${note.style} heading="${note.heading}" body="${note.text}"></fridge-note-${note.style}>
+					</a>`).join("")}
 			</div>`;
+
+		addToCache(this)
 	}
 }
 

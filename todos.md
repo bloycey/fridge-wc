@@ -15,3 +15,5 @@
 -   Note editing / Deleting (Long press to edit)
 -   Image notes (with supabase storage)
 -   Favicon
+-   Split components onto screens that need them only
+-   Delete notes

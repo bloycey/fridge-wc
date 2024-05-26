@@ -10,6 +10,10 @@ export default class Preview extends HTMLElement {
 		this.buildHTML();
 	}
 
+	get noteId() {
+		return this.getAttribute("note-id") || false;
+	}
+
 	get noteStyle() {
 		return this.getAttribute("note-style") || "style-1";
 	}
@@ -39,7 +43,7 @@ export default class Preview extends HTMLElement {
 	}
 
 	hasMissingRequiredFields() {
-		return (this.requiresHeadingOrBody() && (!this.hasHeading() || !this.hasBody())) || (this.requiresHeadingOnly() && !this.hasHeading());
+		return (this.requiresHeadingOrBody() && (!this.hasHeading() && !this.hasBody())) || (this.requiresHeadingOnly() && !this.hasHeading());
 	}
 
 	buildHTML() {
@@ -49,13 +53,13 @@ export default class Preview extends HTMLElement {
 			this.innerHTML = /*html*/`
 				<fridge-note-${this.noteStyle} ${this.hasHeading() ? `heading="${this.heading}"` : ""} ${this.hasBody() ? `body="${this.body}"` : ""}></fridge-note-${this.noteStyle}>
 				<div class="flex justify-end mt-4">
-					<input type="submit" value="Save Note" class="btn-green">
+					<input type="submit" value="${this.noteId ? "Update Note" : "Save Note"}" class="btn-green">
 				</div>
 			`
 		}
 	}
 }
 
-if (!customElements.get("fridge-new-note-preview")) {
-	customElements.define("fridge-new-note-preview", Preview);
+if (!customElements.get("fridge-note-preview")) {
+	customElements.define("fridge-note-preview", Preview);
 }

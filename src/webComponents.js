@@ -10,6 +10,7 @@ import "./pages/tasks"
 import "./pages/settings"
 import "./pages/settings/activeFridge"
 import "./pages/settings/yourFridge"
+import "./pages/createEditNote"
 
 // COMPONENTS //
 
@@ -39,6 +40,7 @@ import "./components/notes/style1Edit"
 import "./components/notes/style2"
 import "./components/notes/style2Edit"
 import "./components/notes/style3"
+import "./components/viewEditNote/noteInner"
 
 // ICONS //
 

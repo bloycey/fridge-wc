@@ -13,14 +13,14 @@ export default class NoteStyle1Edit extends HTMLElement {
 	connectedCallback() {
 		const titleInput = this.querySelector("input");
 		const contentInput = this.querySelector("textarea");
-		const newNoteWrapper = document.querySelector("fridge-page-new-note");
+		const newNoteWrapper = document.querySelector("fridge-page-create-edit-note");
 
 		titleInput.addEventListener("input", (e) => {
-			newNoteWrapper.setAttribute("heading", e.target.value);
+			newNoteWrapper.setAttribute("heading", e.target.value || "");
 		})
 
 		contentInput.addEventListener("input", (e) => {
-			newNoteWrapper.setAttribute("body", e.target.value);
+			newNoteWrapper.setAttribute("body", e.target.value || "");
 		})
 	}
 

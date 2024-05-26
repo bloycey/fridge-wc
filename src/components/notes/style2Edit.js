@@ -12,7 +12,7 @@ export default class NoteStyle2Edit extends HTMLElement {
 
 	connectedCallback() {
 		const titleInput = this.querySelector("input");
-		const newNoteWrapper = document.querySelector("fridge-page-new-note");
+		const newNoteWrapper = document.querySelector("fridge-page-create-edit-note");
 
 		titleInput.addEventListener("input", (e) => {
 			newNoteWrapper.setAttribute("heading", e.target.value);
