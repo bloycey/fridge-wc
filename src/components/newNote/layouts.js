@@ -11,7 +11,7 @@ export default class Layouts extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const newNoteWrapper = document.querySelector("fridge-page-new-note") || document.querySelector("fridge-page-edit-note");
+		const newNoteWrapper = document.querySelector("fridge-page-create-edit-note");
 		const styleRadios = this.querySelectorAll("input[name='style']");
 		styleRadios.forEach(radio => {
 			radio.addEventListener("change", (e) => {
