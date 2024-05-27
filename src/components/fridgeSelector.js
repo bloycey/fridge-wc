@@ -24,7 +24,6 @@ export default class FridgeSelector extends HTMLElement {
 		const { data: myData, error: myError } = await supabase.from("users").select().eq('email', this.userData.email).single();
 		const { data: availableFridges, error: fridgesError } = await supabase.from("invitations").select().eq('invited', this.userData.email);
 		const isActive = id => {
-			console.log(id, myData.activeHousehold)
 			return myData.activeHousehold === id;
 		}
 

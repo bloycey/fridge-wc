@@ -1,9 +1,30 @@
+import { supabase } from "../../db/supabase"
+import { navigate } from "../../../main"
+
 export default class Preview extends HTMLElement {
 	static observedAttributes = ["note-style", "heading", "body"];
 
 	constructor() {
 		super();
+		this.isEdit = this.noteId;
 		this.buildHTML();
+	}
+
+	connectedCallback() {
+		if (this.isEdit) {
+			this.querySelector("#delete-note").addEventListener("click", this.deleteNote.bind(this));
+		}
+	}
+
+	disconnectedCallback() {
+		if (this.isEdit) {
+			this.querySelector("#delete-note").removeEventListener("click", this.deleteNote);
+		}
+	}
+
+	async deleteNote() {
+		const { error } = await supabase.from("notes").delete().eq("id", this.noteId);
+		navigate("/notes/");
 	}
 
 	attributeChangedCallback() {
@@ -52,8 +73,9 @@ export default class Preview extends HTMLElement {
 		} else {
 			this.innerHTML = /*html*/`
 				<fridge-note-${this.noteStyle} ${this.hasHeading() ? `heading="${this.heading}"` : ""} ${this.hasBody() ? `body="${this.body}"` : ""}></fridge-note-${this.noteStyle}>
-				<div class="flex justify-end mt-4">
-					<input type="submit" value="${this.noteId ? "Update Note" : "Save Note"}" class="btn-green">
+				<div class="flex justify-end mt-4 space-x-2 px-4">
+					${this.isEdit ? `<button class="btn-tertiary flex-1" id="delete-note">Delete</button>` : ""}
+					<input type="submit" value="${this.isEdit ? "Update Note" : "Save Note"}" class="${this.isEdit ? "btn-green" : "btn-primary"} flex-1">
 				</div>
 			`
 		}

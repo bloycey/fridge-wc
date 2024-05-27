@@ -7,10 +7,6 @@ export default class NoteInner extends HTMLElement {
 		this.buildHTML();
 	}
 
-	connectedCallback() {
-		console.log("is edit?", this.isEdit)
-	}
-
 	get noteId() {
 		return this.getAttribute("note-id") || "";
 	}

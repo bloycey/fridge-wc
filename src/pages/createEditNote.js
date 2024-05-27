@@ -16,14 +16,13 @@ export default class CreateEditNote extends HTMLElement {
 	}
 
 	connectedCallback() {
-		console.log("this", this)
 		const newNoteForm = this.querySelector("#new-note-form");
 		newNoteForm.addEventListener("submit", this.submitForm.bind(this));
 	}
 
 	disconnectedCallback() {
 		const newNoteForm = this.querySelector("#new-note-form");
-		newNoteForm.removeEventListener("submit", this.submitForm);
+		newNoteForm.removeEventListener("submit", this.submitForm.bind(this));
 	}
 
 	async submitForm(e) {
@@ -31,8 +30,6 @@ export default class CreateEditNote extends HTMLElement {
 		const newNoteForm = this.querySelector("#new-note-form");
 		const formData = new FormData(newNoteForm);
 		const data = Object.fromEntries(formData.entries());
-		console.log(data, this.noteId)
-		console.log(this.userData, this.householdData)
 		if (this.isEdit) {
 			const { error } = await supabase.from("notes").update({ heading: data.heading, text: data.text, household: this.householdData.id, author: this.userData.name, style: data.style }).eq("id", this.noteId)
 			if (error) {

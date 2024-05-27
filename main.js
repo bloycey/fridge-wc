@@ -49,8 +49,8 @@ export const navigate = path => {
 const checkSessionForAuth = async () => {
 	const { data, error } = await supabase.auth.getSession()
 	if (error) {
-		console.log(error)
-		navigate("/404")
+		console.error(error)
+		navigate("/404/")
 	}
 	if (!data.session && window.location.pathname !== "/") {
 		navigate("/")
@@ -107,7 +107,7 @@ const routes = [
 		path: '/new-note',
 		async action() {
 			await checkSessionForAuth()
-			return /*html*/`<fridge-page-new-note></fridge-page-new-note>`
+			return /*html*/`<fridge-page-create-edit-note></fridge-page-create-edit-note>`
 		}
 	},
 	{

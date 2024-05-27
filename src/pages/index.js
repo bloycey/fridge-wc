@@ -23,8 +23,6 @@ export default class Index extends HTMLElement {
 					},
 				},
 			})
-			console.log("data", data)
-			console.log("error", error)
 		})
 	}
 
