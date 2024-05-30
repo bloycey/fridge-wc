@@ -22,10 +22,10 @@ export default class Layouts extends HTMLElement {
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
-		<ul class="list-none space-y-4 p-6">
+		<ul class="list-none space-y-6 p-6">
 			<li>
 				${withRadioCard({
-			contents: '<fridge-note-style-1 heading="This is an optional title" body="Remember, a note is just some text on a page right? It doesn’t necessarily need a  card or a divider or anything."></fridge-note-1>',
+			contents: '<fridge-note-style-1 heading="Light Note" body="A light style note with an accent stripe."></fridge-note-1>',
 			id: 'style-1',
 			isChecked: this.selected === "style-1",
 			name: "style"
@@ -33,7 +33,7 @@ export default class Layouts extends HTMLElement {
 			</li>
 			<li>
 				${withRadioCard({
-			contents: '<fridge-note-style-2 heading="This note is short."></fridge-note-2>',
+			contents: '<fridge-note-style-2 heading="A short, punchy note!"></fridge-note-2>',
 			id: 'style-2',
 			isChecked: this.selected === "style-2",
 			name: "style"
@@ -42,7 +42,7 @@ export default class Layouts extends HTMLElement {
 			<li>
 
 				${withRadioCard({
-			contents: '<fridge-note-style-3 heading="A traditional style note" body="This note has a heading, and some body text, and is a reasonably short length. Like most notes."></fridge-note-3>',
+			contents: '<fridge-note-style-3 heading="Green note" body="Inverted colours for extra emphasis."></fridge-note-3>',
 			id: 'style-3',
 			isChecked: this.selected === "style-3",
 			name: "style"

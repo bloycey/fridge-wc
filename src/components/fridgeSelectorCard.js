@@ -50,8 +50,9 @@ export default class FridgeSelectorCard extends HTMLElement {
 		button.addEventListener("click", async () => {
 			allFridges.forEach(fridge => fridge.removeAttribute("active"));
 			this.setAttribute("active", "true");
-			const { data, error } = await supabase.from("users").update({ activeHousehold: this.householdId }).eq("user_id", this.userData.id).select();
+			const { data: newUserData, error } = await supabase.from("users").update({ activeHousehold: this.householdId }).eq("user_id", this.userData.user_id).select().single();
 			const { data: newHouseholdData, error: newHouseholdError } = await supabase.from("households").select().eq('id', this.householdId).single();
+			localStorage.setItem("FRIDGE_USER", JSON.stringify(newUserData))
 			localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(newHouseholdData))
 		})
 	}

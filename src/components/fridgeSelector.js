@@ -21,15 +21,16 @@ export default class FridgeSelector extends HTMLElement {
 	}
 
 	async buildHTML() {
-		const { data: myData, error: myError } = await supabase.from("users").select().eq('email', this.userData.email).single();
 		const { data: availableFridges, error: fridgesError } = await supabase.from("invitations").select().eq('invited', this.userData.email);
 		const isActive = id => {
-			return myData.activeHousehold === id;
+			return this.userData.activeHousehold === id;
 		}
+
+		console.log("user_data", this.userData, this.userData.activeHousehold, this.userData.user_id)
 
 		this.innerHTML = /*html*/ `
 			<ul class="list-none space-y-2">
-				<fridge-active-fridge-selector-card household-id="${this.userData.id}" active="${myData.activeHousehold === this.userData.id}"></fridge-active-fridge-selector-card>
+				<fridge-active-fridge-selector-card household-id="${this.userData.user_id}" active="${this.userData.activeHousehold === this.userData.user_id}"></fridge-active-fridge-selector-card>
 				${availableFridges.map(fridge => /*html*/ `<fridge-active-fridge-selector-card household-id="${fridge.invited_by}" active="${isActive(fridge.invited_by)}"></fridge-active-fridge-selector-card>`).join("")}
 			</ul>
 		`

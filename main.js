@@ -10,7 +10,7 @@ supabase.auth.onAuthStateChange((event, session) => {
 			const userEmail = session.user.email;
 			setTimeout(async () => {
 				// Check if user exists
-				const { data, error } = await supabase.from("users").select()
+				const { data, error } = await supabase.from("users").select().eq("email", userEmail)
 
 				if (error) {
 					navigate("/404")
@@ -28,6 +28,17 @@ supabase.auth.onAuthStateChange((event, session) => {
 						.insert({ name: `${user.user_metadata.name}'s Fridge`, ownerName: user.user_metadata.name }).select()
 
 					localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(householdData))
+				}
+
+				if (data) {
+					const { data: currentHouseholdData, error: currentHouseholdError } = await supabase.from("households").select().eq('id', data[0].activeHousehold).single();
+					if (currentHouseholdError) {
+						console.error(currentHouseholdError)
+					} else {
+						localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(currentHouseholdData))
+					}
+
+					localStorage.setItem("FRIDGE_USER", JSON.stringify(data[0]))
 				}
 
 				// Refresh token
@@ -56,7 +67,6 @@ const checkSessionForAuth = async () => {
 		navigate("/")
 	}
 	if (data.session) {
-		localStorage.setItem("FRIDGE_USER", JSON.stringify({ ...data.session.user.user_metadata, id: data.session.user.id }))
 		return true
 	} else {
 		return false

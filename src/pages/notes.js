@@ -8,7 +8,7 @@ export default class Notes extends HTMLElement {
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
-			<div class="grid-bg screen-content overflow-auto">
+			<div class="screen-content overflow-auto">
 				${withNav(/*html*/ `
 					<fridge-notes-list id="notes-list"></fridge-notes-list>
 				`)}

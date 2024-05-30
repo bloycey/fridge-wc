@@ -20,10 +20,10 @@ export default class NoteStyle3 extends HTMLElement {
 
 	buildHTML() {
 		this.innerHTML =  /*html*/ `
-			<article class="bg-darkest-green text-white">
-				<div class="px-6 py-8">
-					${this.heading ? `<h1 class="text-2xl mb-3">${this.heading}</h1>` : ""}
-					<p>${this.body}</p>
+			<article class="shadow-sm relative text-white">
+				<div class="bg-green rounded-sm px-4 py-3">
+					${this.heading ? `<h1 class="text-xl">${this.heading}</h1>` : ""}
+					<p class="text-sm">${this.body}</p>
 				</div>
 			</article>`
 	}

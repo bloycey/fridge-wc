@@ -230,7 +230,7 @@ fridge-note {
 }
 
 input[name="style"]:checked + div {
-	@apply border-green;
+	/* @apply ring ring-green ring-offset-8; */
 }
 
 input[name="style"]:checked + div heroicon-check-circle {

@@ -17,3 +17,4 @@
 -   Favicon
 -   Split components onto screens that need them only
 -   Delete notes
+-   https://github.com/alefduarte/image-resize-compress?tab=readme-ov-file#readme

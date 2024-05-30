@@ -15,9 +15,9 @@ export default class Notes extends HTMLElement {
 		}
 
 		this.innerHTML = /*html*/`
-			<div id="notes">
+			<div id="notes" class="space-y-2 py-4">
 				${notes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((note) => /*html*/`
-					<a href="/note/${note.id}">
+					<a href="/note/${note.id}" class="block ${note.style === "style-1" || note.style === "style-3" ? "mx-4" : ""}">
 						<fridge-note-${note.style} heading="${note.heading}" body="${note.text}"></fridge-note-${note.style}>
 					</a>`).join("")}
 			</div>`;

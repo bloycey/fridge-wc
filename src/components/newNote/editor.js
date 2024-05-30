@@ -19,7 +19,15 @@ export default class Editor extends HTMLElement {
 	}
 
 	get noteStyle() {
-		return this.getAttribute("note-style") || "";
+		const noteStyle = this.getAttribute("note-style") || "";
+		if (noteStyle !== "") {
+			return {
+				"style-1": "style-1",
+				"style-2": "style-2",
+				"style-3": "style-1",
+			}[noteStyle]
+		}
+		return ""
 	}
 
 	buildHTML() {

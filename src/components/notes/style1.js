@@ -22,9 +22,11 @@ export default class NoteStyle1 extends HTMLElement {
 
 	buildHTML() {
 		this.innerHTML =  /*html*/ `
-			<article class="p-4 space-y-2">
-				${this.heading ? `<h1 class="text-2xl">${this.heading}</h1>` : ""}
-				${this.body ? `<p>${this.body}</p>` : ""}
+			<article class="border-l-4 border-dark-green shadow-sm relative">
+				<div class="bg-light-green rounded-md rounded-tl-none rounded-bl-none px-4 py-3">
+					${this.heading ? `<h1 class="text-xl">${this.heading}</h1>` : ""}
+					${this.body ? `<p class="text-sm">${this.body}</p>` : ""}
+				</div>
 			</article>`
 	}
 }
@@ -34,3 +36,4 @@ if (!customElements.get("fridge-note-style-1")) {
 }
 
 {/* <img src="${scribble}" alt="Decorative scribble" class="w-full" /> */ }
+{/* <div class="bg-white border border-dark-green shadow-lg rounded-md p-4"> */ }
