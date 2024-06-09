@@ -79,7 +79,7 @@ const routes = [
 		async action() {
 			const hasActiveSession = await checkSessionForAuth()
 			if (hasActiveSession) {
-				navigate("/home")
+				navigate("/home/")
 			} else {
 				return /*html*/`<fridge-page-index></fridge-page-index>`
 			}
@@ -93,38 +93,17 @@ const routes = [
 		}
 	},
 	{
-		path: '/lists',
+		path: '/list/',
 		async action() {
 			await checkSessionForAuth()
 			return /*html*/`<fridge-page-lists></fridge-page-lists>`
 		}
 	},
 	{
-		path: '/notes',
+		path: '/photos',
 		async action() {
 			await checkSessionForAuth()
-			return /*html*/`<fridge-page-notes></fridge-page-notes>`
-		}
-	},
-	{
-		path: '/note/:id',
-		async action(context) {
-			await checkSessionForAuth()
-			return /*html*/`<fridge-page-create-edit-note note-id="${context.params.id}"></fridge-page-create-edit-note>`
-		}
-	},
-	{
-		path: '/new-note',
-		async action() {
-			await checkSessionForAuth()
-			return /*html*/`<fridge-page-create-edit-note></fridge-page-create-edit-note>`
-		}
-	},
-	{
-		path: '/bills',
-		async action() {
-			await checkSessionForAuth()
-			return /*html*/`<fridge-page-bills></fridge-page-bills>`
+			return /*html*/`<fridge-page-photos></fridge-page-photos>`
 		}
 	},
 	{
@@ -132,6 +111,13 @@ const routes = [
 		async action() {
 			await checkSessionForAuth()
 			return /*html*/`<fridge-page-tasks></fridge-page-tasks>`
+		}
+	},
+	{
+		path: '/events',
+		async action() {
+			await checkSessionForAuth()
+			return /*html*/`<fridge-page-events></fridge-page-events>`
 		}
 	},
 	{
