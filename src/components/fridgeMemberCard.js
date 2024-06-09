@@ -6,7 +6,6 @@ export default class FridgeMemberCard extends HTMLElement {
 
 	constructor() {
 		super();
-		this.userData = getUserData();
 	}
 
 	attributeChangedCallback() {
@@ -29,7 +28,8 @@ export default class FridgeMemberCard extends HTMLElement {
 		return this.getAttribute("is-admin") === "true";
 	}
 
-	buildHTML() {
+	async buildHTML() {
+		this.userData = await getUserData();
 		this.innerHTML = /*html*/ `
 			<div class="p-4 bg-light-green flex items-center">
 				<div class="flex-1">

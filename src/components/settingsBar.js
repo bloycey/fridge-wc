@@ -5,15 +5,15 @@ import { loadFromCache, addToCache } from "../helpers/cache";
 export default class SettingsBar extends HTMLElement {
 	constructor() {
 		super();
-		this.userData = getUserData();
-		this.householdData = getHouseholdData();
 	}
 
 	connectedCallback() {
 		this.buildHTML();
 	}
 
-	buildHTML() {
+	async buildHTML() {
+		this.userData = await getUserData();
+		this.householdData = getHouseholdData();
 		this.innerHTML = /*html*/`
 			<a href="/settings" class="text-darkest-green flex block bg-light-green rounded-full p-1.5 space-between items-center m-2">
 				<div class="flex-1 flex items-center">

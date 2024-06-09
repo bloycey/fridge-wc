@@ -5,7 +5,6 @@ import { addToCache, loadFromCache } from "../helpers/cache";
 export default class FridgeSelector extends HTMLElement {
 	constructor() {
 		super();
-		this.userData = getUserData();
 
 		// TODO: This kinds sucks, maybe a regular loading instead of the skeleton?
 		this.innerHTML = /*html*/ `
@@ -21,6 +20,7 @@ export default class FridgeSelector extends HTMLElement {
 	}
 
 	async buildHTML() {
+		this.userData = await getUserData();
 		const { data: availableFridges, error: fridgesError } = await supabase.from("invitations").select().eq('invited', this.userData.email);
 		const isActive = id => {
 			return this.userData.activeHousehold === id;

@@ -6,7 +6,6 @@ export default class FridgeName extends HTMLElement {
 	constructor() {
 		super();
 		this.householdData = getHouseholdData();
-		this.userData = getUserData();
 	}
 
 	connectedCallback() {
@@ -22,7 +21,8 @@ export default class FridgeName extends HTMLElement {
 		}, 500))
 	}
 
-	buildHTML() {
+	async buildHTML() {
+		this.userData = await getUserData();
 		this.innerHTML = /*html*/ `
 			<label for="house-name">Your Fridge Name</label>
 			<input type="text" id="house-name" class="bg-light-green rounded-md w-full px-5 py-4 focus-visible:outline-none focus-visible:ring-green focus-visible:ring-2" value="${this.householdData.name}">

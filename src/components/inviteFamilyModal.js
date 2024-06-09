@@ -4,7 +4,6 @@ import { supabase } from "../db/supabase"
 export default class InviteFamily extends HTMLElement {
 	constructor() {
 		super();
-		this.userData = getUserData();
 	}
 
 	connectedCallback() {
@@ -28,7 +27,8 @@ export default class InviteFamily extends HTMLElement {
 		})
 	}
 
-	buildHTML() {
+	async buildHTML() {
+		this.userData = await getUserData();
 		this.innerHTML = /*html*/ `
 		<zap-modal class="w-full" id="invite-family-modal" displayCloseIcon="false" hideFooter="true">
 			<button class="btn-primary block w-full mt-2" slot="trigger">Invite your family</button>

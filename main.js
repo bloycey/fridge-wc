@@ -79,7 +79,7 @@ const routes = [
 		async action() {
 			const hasActiveSession = await checkSessionForAuth()
 			if (hasActiveSession) {
-				navigate("/home/")
+				navigate("/home")
 			} else {
 				return /*html*/`<fridge-page-index></fridge-page-index>`
 			}

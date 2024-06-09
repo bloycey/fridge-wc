@@ -5,7 +5,6 @@ import { addToCache, loadFromCache } from "../helpers/cache";
 export default class FridgeMembers extends HTMLElement {
 	constructor() {
 		super();
-		this.userData = getUserData();
 		loadFromCache(this);
 	}
 
@@ -14,6 +13,7 @@ export default class FridgeMembers extends HTMLElement {
 	}
 
 	async buildHTML() {
+		this.userData = await getUserData();
 		const { data: invitationData, error: invitationError } = await supabase.from("invitations").select().eq('invited_by', this.userData.id);
 		if (invitationError) {
 			console.error(invitationError)

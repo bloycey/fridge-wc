@@ -12,7 +12,6 @@ export default class CreateEditNote extends HTMLElement {
 		this.isEdit = this.noteId !== "";
 		this.buildHTML();
 		this.householdData = getHouseholdData();
-		this.userData = getUserData();
 	}
 
 	connectedCallback() {
@@ -62,7 +61,8 @@ export default class CreateEditNote extends HTMLElement {
 		preview.setAttribute(name, newValue);
 	}
 
-	buildHTML() {
+	async buildHTML() {
+		this.userData = await getUserData();
 		this.innerHTML = /*html*/`
 			<fridge-back-bar link="/notes/" text="Back to notes"></fridge-back-bar>
 			<form id="new-note-form">
