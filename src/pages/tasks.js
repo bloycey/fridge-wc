@@ -1,5 +1,4 @@
 import { withNav } from "../layouts/withNav";
-
 export default class Tasks extends HTMLElement {
 	constructor() {
 		super();
@@ -9,6 +8,7 @@ export default class Tasks extends HTMLElement {
 	buildHTML() {
 		return withNav(/*html*/`
 				<h1>Tasks</h1>
+				<fridge-checkbox-list></fridge-checkbox-list>
 			`)
 	}
 }

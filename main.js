@@ -73,6 +73,9 @@ const checkSessionForAuth = async () => {
 	}
 }
 
+// BIG IDEA - can I use idiomorph as a sort of global morpher for the app?
+// Would need to get the html of the current page, then the html of the new page, then morph between them
+
 const routes = [
 	{
 		path: '',
@@ -151,6 +154,7 @@ const router = new UniversalRouter(routes)
 
 export const render = (pathname) => {
 	router.resolve(pathname).then(html => {
+		// Idiomorph.morph(app, html, { morphStyle: 'innerHTML'})
 		app.innerHTML = html
 	})
 }

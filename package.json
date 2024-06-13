@@ -15,6 +15,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "@ionic/core": "^8.2.1",
     "@supabase/supabase-js": "^2.43.1",
     "history": "^5.3.0",
     "morphdom": "^2.7.2",

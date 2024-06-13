@@ -18,3 +18,36 @@ export const getUserData = async () => {
 		}
 	}
 }
+
+export const getListItemsCount = async () => {
+	const householdData = getHouseholdData();
+	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id)
+	return listItems.length;
+}
+
+export const getListItems = async () => {
+	const householdData = getHouseholdData();
+	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id).eq("checked", false)
+	return listItems;
+}
+
+export const setListItemToChecked = async (id) => {
+	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ checked: true }).eq("id", id)
+}
+
+export const setListItemName = async (id, text) => {
+	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ text }).eq("id", id)
+}
+
+export const setListItemOrder = async (id, order) => {
+	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ order }).eq("id", id)
+}
+
+export const setListItem = async (listItem) => {
+	const dataToSubmit = {
+		...listItem,
+		household: getHouseholdData().id
+	}
+	const { data: createdListItem, error: listItemError } = await supabase.from("list_items").insert(dataToSubmit).select().single()
+	return createdListItem;
+}

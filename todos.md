@@ -20,3 +20,5 @@
 -   https://github.com/alefduarte/image-resize-compress?tab=readme-ov-file#readme
 -   Should await getUserData everywhere now
 -   Need to give a DB fallback for getHouseholdData too.
+-   https://supabase.com/blog/postgres-as-a-cron-server
+-   https://ionicframework.com/docs/api/reorder - Use this for shopping list and task list
