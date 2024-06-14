@@ -1,4 +1,4 @@
-import { setListItem, getListItemsCount } from "../../helpers/data";
+import { setListItem, getListItemsCount, setListItemOrder } from "../../helpers/data";
 
 export default class AddToList extends HTMLElement {
 	constructor() {
@@ -10,14 +10,20 @@ export default class AddToList extends HTMLElement {
 		const addItemForm = this.querySelector("#add-item")
 		addItemForm.addEventListener("submit", async (e) => {
 			e.preventDefault()
-			const shoppingList = document.querySelector("#shopping-list")
 			const formData = Object.fromEntries(new FormData(addItemForm))
 			addItemForm.reset()
-			const count = await getListItemsCount()
-			const listItemWithCount = { ...formData, order: count || 0 }
-			const newListItem = await setListItem(listItemWithCount)
-			shoppingList.addItem(newListItem)
+			this.setListItemAndSetId(formData)
 		})
+	}
+
+	async setListItemAndSetId(itemData) {
+		const shoppingList = document.querySelector("#shopping-list")
+		const temporaryData = { ...itemData, checked: false, order: 0 }
+		shoppingList.addItem(temporaryData)
+		const newItem = await setListItem(temporaryData)
+		const itemJustAdded = shoppingList.querySelector("fridge-checkbox-list-item")
+		itemJustAdded.id = newItem.id
+		setListItemOrder(newItem.id, itemJustAdded.order)
 	}
 
 	buildHTML() {

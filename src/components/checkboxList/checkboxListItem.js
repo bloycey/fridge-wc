@@ -1,14 +1,11 @@
-import { setListItemCheckedStatus, setListItemName, setListItemOrder, deleteListItem } from "../../helpers/data";
+import { setListItem, setListItemCheckedStatus, setListItemName, setListItemOrder, deleteListItem } from "../../helpers/data";
 import { debounce } from "../../helpers/debounce";
 
 export default class CheckboxListItem extends HTMLElement {
 	static observedAttributes = ["value", "order"];
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		if (name === "order") {
-			setListItemOrder(this.id, newValue)
-		}
-		if (name === "value") {
+		if (name === "text") {
 			this.buildHTML()
 		}
 	}
@@ -62,7 +59,11 @@ export default class CheckboxListItem extends HTMLElement {
 	}
 
 	get id() {
-		return this.getAttribute("id") || "";
+		return this.getAttribute("id") || false;
+	}
+
+	set id(value) {
+		this.setAttribute("id", value);
 	}
 
 	get text() {

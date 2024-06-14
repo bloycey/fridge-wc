@@ -1,3 +1,5 @@
+import { setListItemOrder } from "../../helpers/data";
+
 export default class CheckboxList extends HTMLElement {
 	constructor() {
 		super();
@@ -26,6 +28,7 @@ export default class CheckboxList extends HTMLElement {
 				const newOrder = [...this.querySelector('ion-reorder-group').children].reverse()
 				newOrder.forEach((item, index) => {
 					item.order = index
+					setListItemOrder(item.id, index)
 				})
 			})
 		})
@@ -33,7 +36,8 @@ export default class CheckboxList extends HTMLElement {
 
 	addItem(item) {
 		const container = this.querySelector('ion-reorder-group');
-		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" id="${item.id}" order="${item.order}" checked="${item.checked}"></fridge-checkbox-list-item>`)
+		const numberOfItems = container.children.length
+		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" id="${item.id}" checked="${item.checked}" order="${numberOfItems}"></fridge-checkbox-list-item>`)
 	}
 
 	buildHTML() {
