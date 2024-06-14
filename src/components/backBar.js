@@ -16,7 +16,6 @@ export default class BackBar extends HTMLElement {
 
 	get text() {
 		return this.getAttribute("text") || "";
-
 	}
 
 	buildHTML() {

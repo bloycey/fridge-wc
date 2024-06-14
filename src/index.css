@@ -6,7 +6,9 @@
 	--darkest-green: #063732;
 	--dark-green: #08453f;
 	--green: #008073;
+	--lighter-green: #cceae7;
 	--light-green: #e2f3f1;
+	--lightest-green: #f8fcfb;
 	--bright-pink: #f36e86;
 	--pink: #f9b8c4;
 	--light-pink: #fde7eb;
@@ -40,6 +42,7 @@ html {
 	font-family: "Lexend", sans-serif;
 	font-variation-settings: "wght" 350;
 	color: var(--darkest-green);
+	accent-color: var(--green);
 }
 
 h1,
@@ -235,4 +238,24 @@ input[name="style"]:checked + div {
 
 input[name="style"]:checked + div heroicon-check-circle {
 	@apply inline-block;
+}
+
+.checkbox-list-item {
+	--padding-start: 0;
+}
+
+ion-item {
+	--ion-item-background: var(--lightest-green);
+	--ion-item-border-color: rgba(6, 55, 50, 0.1);
+	--inner-padding-top: 4px;
+	--inner-padding-bottom: 4px;
+}
+
+ion-checkbox {
+	--border-color: transparent;
+	--border-color-checked: transparent;
+	--checkbox-background: var(--lighter-green);
+	--checkbox-background-checked: var(--lighter-green);
+	--checkmark-color: var(--dark-green);
+	--size: 20px;
 }

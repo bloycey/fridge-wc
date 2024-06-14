@@ -28,18 +28,17 @@ export default class CheckboxList extends HTMLElement {
 					item.order = index
 				})
 			})
-
 		})
 	}
 
 	addItem(item) {
 		const container = this.querySelector('ion-reorder-group');
-		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" id="${item.id}" order="${item.order}"></fridge-checkbox-list-item>`)
+		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" id="${item.id}" order="${item.order}" checked="${item.checked}"></fridge-checkbox-list-item>`)
 	}
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
-				<ion-list>
+				<ion-list class="py-0">
 					<ion-reorder-group disabled="false">
 					</ion-reorder-group>
 				</ion-list>

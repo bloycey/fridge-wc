@@ -22,3 +22,4 @@
 -   Need to give a DB fallback for getHouseholdData too.
 -   https://supabase.com/blog/postgres-as-a-cron-server
 -   https://ionicframework.com/docs/api/reorder - Use this for shopping list and task list
+-   Shopping list - Multiplayer, removing item, recently bought items, styling, empty states, loading states, caching

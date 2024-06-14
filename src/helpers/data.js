@@ -27,12 +27,18 @@ export const getListItemsCount = async () => {
 
 export const getListItems = async () => {
 	const householdData = getHouseholdData();
-	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id).eq("checked", false)
+	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id)
 	return listItems;
 }
 
-export const setListItemToChecked = async (id) => {
-	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ checked: true }).eq("id", id)
+export const getCheckedListItems = async () => {
+	const householdData = getHouseholdData();
+	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id).eq("checked", true)
+	return listItems;
+}
+
+export const setListItemCheckedStatus = async (id, checkedStatus) => {
+	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ checked: checkedStatus }).eq("id", id)
 }
 
 export const setListItemName = async (id, text) => {
@@ -50,4 +56,8 @@ export const setListItem = async (listItem) => {
 	}
 	const { data: createdListItem, error: listItemError } = await supabase.from("list_items").insert(dataToSubmit).select().single()
 	return createdListItem;
+}
+
+export const deleteListItem = async (id) => {
+	const { data: deletedListItem, error: listItemError } = await supabase.from("list_items").delete().eq("id", id)
 }
