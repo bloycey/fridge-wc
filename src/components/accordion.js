@@ -27,7 +27,7 @@ export default class Accordion extends HTMLElement {
 	}
 
 	get isOpen() {
-		return this.getAttribute("open") || false;
+		return this.getAttribute("open") === "true" || false;
 	}
 
 	get heading() {

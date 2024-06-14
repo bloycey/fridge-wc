@@ -61,3 +61,7 @@ export const setListItem = async (listItem) => {
 export const deleteListItem = async (id) => {
 	const { data: deletedListItem, error: listItemError } = await supabase.from("list_items").delete().eq("id", id)
 }
+
+export const deleteListItems = async (ids) => {
+	const { data: deletedListItems, error: listItemError } = await supabase.from("list_items").delete().in("id", ids)
+}

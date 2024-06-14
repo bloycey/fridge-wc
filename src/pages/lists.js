@@ -1,10 +1,22 @@
 import { withNav } from "../layouts/withNav";
-import { setListItem, getListItems } from "../helpers/data";
+import { setListItem, getListItems, deleteListItems } from "../helpers/data";
 
 export default class Lists extends HTMLElement {
 	constructor() {
 		super();
 		this.buildHTML();
+	}
+
+	connectedCallback() {
+		const clearCompletedBtn = this.querySelector(".clear-completed-btn")
+		clearCompletedBtn.addEventListener("click", async (e) => {
+			e.stopPropagation()
+			const recentItemsWrapper = this.querySelector("#shopping-list-recent")
+			const recentItems = [...recentItemsWrapper.querySelectorAll("fridge-checkbox-list-item")]
+			const recentItemIds = recentItems.map(item => item.id)
+			recentItems.forEach(item => item.remove())
+			deleteListItems(recentItemIds)
+		})
 	}
 
 	async buildHTML() {
@@ -17,11 +29,16 @@ export default class Lists extends HTMLElement {
 					<section class="mt-6 border-t">
 						<fridge-checkbox-list id="shopping-list"></fridge-checkbox-list>
 					</section>
-					<fridge-accordion heading="Recently Purchased" open="true">
-						<template>
-							<fridge-checkbox-list id="shopping-list-recent"></fridge-checkbox-list>
-						</template>
-					</fridge-accordion>
+					<section class="relative">
+						<button class="absolute right-0 text-xs opacity-80 text-darkest-green top-4 right-4 underline clear-completed-btn z-50">
+							Clear
+						</button>
+						<fridge-accordion heading="Recently Purchased" open="false" class="block pb-8">
+							<template>
+								<fridge-checkbox-list id="shopping-list-recent"></fridge-checkbox-list>
+							</template>
+						</fridge-accordion>
+					</section>
 				</div>
 		`)
 		const items = await getListItems()
