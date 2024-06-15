@@ -99,7 +99,7 @@ const routes = [
 		path: '/list/',
 		async action() {
 			await checkSessionForAuth()
-			return /*html*/`<fridge-page-lists></fridge-page-lists>`
+			return /*html*/`<fridge-page-lists id="lists-page"></fridge-page-lists>`
 		}
 	},
 	{

@@ -1,4 +1,5 @@
 import { setListItemOrder } from "../../helpers/data";
+import { addToCache, loadFromCache, watchForChanges, unwatch } from "../../helpers/cache";
 
 export default class CheckboxList extends HTMLElement {
 	constructor() {
@@ -6,12 +7,15 @@ export default class CheckboxList extends HTMLElement {
 		this.buildHTML();
 	}
 
+	get completed() {
+		return this.getAttribute("completed") || false
+	}
+
 	connectedCallback() {
 		const reorderGroup = this.querySelector('ion-reorder-group');
 		reorderGroup.addEventListener('ionItemReorder', (event) => {
 			// The `from` and `to` properties contain the index of the item
 			// when the drag started and ended, respectively
-			console.log(event.target)
 			const from = event.detail.to
 			const to = event.detail.from
 			// const movedItem = event.target.querySelector(`fridge-checkbox-list-item[order="${from}"]`)
@@ -28,7 +32,7 @@ export default class CheckboxList extends HTMLElement {
 				const newOrder = [...this.querySelector('ion-reorder-group').children].reverse()
 				newOrder.forEach((item, index) => {
 					item.order = index
-					setListItemOrder(item.id, index)
+					setListItemOrder(item.list_id, index)
 				})
 			})
 		})
@@ -37,13 +41,13 @@ export default class CheckboxList extends HTMLElement {
 	addItem(item) {
 		const container = this.querySelector('ion-reorder-group');
 		const numberOfItems = container.children.length
-		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" list_id="${item.list_id}" checked="${item.checked}" order="${item.order}"></fridge-checkbox-list-item>`)
+		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" list_id="${item.list_id}" checked="${item.checked}" order="${item.order}" read-only="${this.completed}"></fridge-checkbox-list-item>`)
 	}
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
 				<ion-list class="py-0">
-					<ion-reorder-group disabled="false">
+					<ion-reorder-group disabled="${this.completed === 'true'}">
 					</ion-reorder-group>
 				</ion-list>
 			`

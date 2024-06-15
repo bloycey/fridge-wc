@@ -1,14 +1,17 @@
 import { supabase } from "../db/supabase";
 import { withNav } from "../layouts/withNav";
 import { setListItem, getListItems, deleteListItems } from "../helpers/data";
+import { loadFromCache, watchForChanges, unwatch } from "../helpers/cache";
 
 export default class Lists extends HTMLElement {
 	constructor() {
 		super();
+		loadFromCache(this)
 		this.buildHTML();
 	}
 
 	connectedCallback() {
+		watchForChanges(this)
 		supabase
 			.channel('shopping-list')
 			.on('postgres_changes', { event: '*', schema: 'public', table: 'list_items' }, payload => {
@@ -38,11 +41,11 @@ export default class Lists extends HTMLElement {
 					</section>
 					<section class="relative">
 						<button class="absolute right-0 text-xs opacity-80 text-darkest-green top-4 right-4 underline clear-completed-btn z-50">
-							Clear
+							Clear All
 						</button>
 						<fridge-accordion heading="Recently Purchased" open="false" class="block pb-8">
 							<template>
-								<fridge-checkbox-list id="shopping-list-recent"></fridge-checkbox-list>
+								<fridge-checkbox-list id="shopping-list-recent" completed="true"></fridge-checkbox-list>
 							</template>
 						</fridge-accordion>
 					</section>

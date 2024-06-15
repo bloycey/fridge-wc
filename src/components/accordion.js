@@ -1,9 +1,6 @@
 export default class Accordion extends HTMLElement {
 	constructor() {
 		super();
-		const accordionTemplate = this.querySelector("template")
-		this.accordionContent = accordionTemplate.innerHTML
-		accordionTemplate.remove()
 		this.buildHTML();
 	}
 
@@ -39,6 +36,11 @@ export default class Accordion extends HTMLElement {
 	}
 
 	buildHTML() {
+		const accordionTemplate = this.querySelector("template")
+		if (accordionTemplate) {
+			this.accordionContent = accordionTemplate.innerHTML
+			accordionTemplate.remove()
+		}
 		this.innerHTML = /*html*/`
 		<button type="button" aria-expanded="${this.isOpen ? "true" : "false"}" aria-controls="${this.id}" class="w-full accordion-btn flex gap-2 items-center text-darkest-green opacity-60 py-4 px-4">
 			<heroicon-caret-down class-names="size-4 transition-all duration-300 accordion-icon ${this.isOpen ? "rotate-180" : ""}"></heroicon-caret-down>

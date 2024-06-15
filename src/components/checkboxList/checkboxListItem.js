@@ -1,5 +1,4 @@
 import { setListItem, setListItemCheckedStatus, setListItemName, setListItemOrder, deleteListItem } from "../../helpers/data";
-import { debounce } from "../../helpers/debounce";
 
 export default class CheckboxListItem extends HTMLElement {
 	static observedAttributes = ["value", "order"];
@@ -20,17 +19,13 @@ export default class CheckboxListItem extends HTMLElement {
 		const textInput = this.querySelector('ion-input');
 		const currentList = document.querySelector("#shopping-list")
 		const recentList = document.querySelector("#shopping-list-recent")
+		const deleteBtn = this.querySelector(".remove-item")
 		checkbox.addEventListener('ionChange', (event) => {
 			if (event.detail.checked) {
 				setListItemCheckedStatus(this.list_id, true)
 				this.checked = true
 				recentList.addItem(this)
 				this.remove()
-				// const checkedItems = [...recentList.querySelectorAll("fridge-checkbox-list-item")]
-				// if (checkedItems.length > 3) {
-				// 	const lastItem = checkedItems[checkedItems.length - 1]
-				// 	lastItem.delete()
-				// }
 			} else {
 				setListItemCheckedStatus(this.list_id, false)
 				this.checked = false
@@ -38,16 +33,25 @@ export default class CheckboxListItem extends HTMLElement {
 				this.remove()
 			}
 		});
-		textInput.addEventListener('ionInput', debounce((event) => {
-			setListItemName(this.id, event.detail.value)
+		textInput.addEventListener('ionInput', (event) => {
+			setListItemName(this.list_id, event.detail.value)
 			this.value = event.detail.value
-		}, 500));
+		});
+		if (deleteBtn) {
+			deleteBtn.addEventListener("click", (e) => {
+				this.delete()
+			})
+		}
 	}
 
 	delete() {
 		this.classList.add("hidden")
 		deleteListItem(this.list_id)
 		this.remove()
+	}
+
+	get readOnly() {
+		return this.getAttribute("read-only") || false;
 	}
 
 	get checked() {
@@ -82,8 +86,11 @@ export default class CheckboxListItem extends HTMLElement {
 		this.innerHTML = /*html*/`
 			<ion-item class="checkbox-list-item">
 				<ion-checkbox justify="start" label-placement="end" class="ml-4" checked="${this.checked}"></ion-checkbox>
-				<ion-input value="${this.text}" class="ml-3 list-text header-font text-2xl text-darkest-green ${this.checked === "true" ? "line-through opacity-60" : ""}"></ion-input>
+				<ion-input value="${this.text}" debounce="500" class="ml-3 list-text header-font text-2xl text-darkest-green ${this.checked === "true" ? "line-through opacity-60" : ""}" disabled="${this.readOnly}"></ion-input>
 				<ion-reorder slot="end"></ion-reorder>
+				${this.readOnly === "true" ?
+					/*html*/`<button slot="end" class="remove-item"><heroicon-trash class-names="size-5 text-darkest-green"></heroicon-trash></button>`
+				: ""}
 			</ion-item>
 		`
 	}
