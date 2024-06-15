@@ -1,3 +1,4 @@
+import { supabase } from "../db/supabase";
 import { withNav } from "../layouts/withNav";
 import { setListItem, getListItems, deleteListItems } from "../helpers/data";
 
@@ -8,6 +9,12 @@ export default class Lists extends HTMLElement {
 	}
 
 	connectedCallback() {
+		supabase
+			.channel('shopping-list')
+			.on('postgres_changes', { event: '*', schema: 'public', table: 'list_items' }, payload => {
+				console.log('Change received!', payload)
+			})
+			.subscribe()
 		const clearCompletedBtn = this.querySelector(".clear-completed-btn")
 		clearCompletedBtn.addEventListener("click", async (e) => {
 			e.stopPropagation()

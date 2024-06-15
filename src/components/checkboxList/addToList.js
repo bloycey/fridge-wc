@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { setListItem, getListItemsCount, setListItemOrder } from "../../helpers/data";
 
 export default class AddToList extends HTMLElement {
@@ -17,13 +18,13 @@ export default class AddToList extends HTMLElement {
 	}
 
 	async setListItemAndSetId(itemData) {
+		const uuid = uuidv4()
 		const shoppingList = document.querySelector("#shopping-list")
-		const temporaryData = { ...itemData, checked: false, order: 0 }
-		shoppingList.addItem(temporaryData)
-		const newItem = await setListItem(temporaryData)
-		const itemJustAdded = shoppingList.querySelector("fridge-checkbox-list-item")
-		itemJustAdded.id = newItem.id
-		setListItemOrder(newItem.id, itemJustAdded.order)
+		const container = shoppingList.querySelector('ion-reorder-group');
+		const numberOfItems = container.children.length
+		const data = { ...itemData, checked: false, order: numberOfItems, note_id: uuid }
+		shoppingList.addItem(data)
+		const newItem = await setListItem(data)
 	}
 
 	buildHTML() {
