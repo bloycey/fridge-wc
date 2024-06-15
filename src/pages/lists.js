@@ -20,7 +20,7 @@ export default class Lists extends HTMLElement {
 			e.stopPropagation()
 			const recentItemsWrapper = this.querySelector("#shopping-list-recent")
 			const recentItems = [...recentItemsWrapper.querySelectorAll("fridge-checkbox-list-item")]
-			const recentItemIds = recentItems.map(item => item.id)
+			const recentItemIds = recentItems.map(item => item.note_id)
 			recentItems.forEach(item => item.remove())
 			deleteListItems(recentItemIds)
 		})
