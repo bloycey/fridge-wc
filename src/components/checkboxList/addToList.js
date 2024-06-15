@@ -22,7 +22,7 @@ export default class AddToList extends HTMLElement {
 		const shoppingList = document.querySelector("#shopping-list")
 		const container = shoppingList.querySelector('ion-reorder-group');
 		const numberOfItems = container.children.length
-		const data = { ...itemData, checked: false, order: numberOfItems, note_id: uuid }
+		const data = { ...itemData, checked: false, order: numberOfItems, list_id: uuid }
 		shoppingList.addItem(data)
 		const newItem = await setListItem(data)
 	}

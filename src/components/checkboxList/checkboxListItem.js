@@ -22,17 +22,17 @@ export default class CheckboxListItem extends HTMLElement {
 		const recentList = document.querySelector("#shopping-list-recent")
 		checkbox.addEventListener('ionChange', (event) => {
 			if (event.detail.checked) {
-				setListItemCheckedStatus(this.id, true)
+				setListItemCheckedStatus(this.list_id, true)
 				this.checked = true
 				recentList.addItem(this)
 				this.remove()
-				const checkedItems = [...recentList.querySelectorAll("fridge-checkbox-list-item")]
-				if (checkedItems.length > 3) {
-					const lastItem = checkedItems[checkedItems.length - 1]
-					lastItem.delete()
-				}
+				// const checkedItems = [...recentList.querySelectorAll("fridge-checkbox-list-item")]
+				// if (checkedItems.length > 3) {
+				// 	const lastItem = checkedItems[checkedItems.length - 1]
+				// 	lastItem.delete()
+				// }
 			} else {
-				setListItemCheckedStatus(this.id, false)
+				setListItemCheckedStatus(this.list_id, false)
 				this.checked = false
 				currentList.addItem(this)
 				this.remove()
@@ -46,7 +46,7 @@ export default class CheckboxListItem extends HTMLElement {
 
 	delete() {
 		this.classList.add("hidden")
-		deleteListItem(this.id)
+		deleteListItem(this.list_id)
 		this.remove()
 	}
 
@@ -58,12 +58,12 @@ export default class CheckboxListItem extends HTMLElement {
 		this.setAttribute("checked", value);
 	}
 
-	get id() {
-		return this.getAttribute("id") || false;
+	get list_id() {
+		return this.getAttribute("list_id") || false;
 	}
 
-	set id(value) {
-		this.setAttribute("id", value);
+	set list_id(value) {
+		this.setAttribute("list_id", value);
 	}
 
 	get text() {

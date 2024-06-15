@@ -37,7 +37,7 @@ export default class CheckboxList extends HTMLElement {
 	addItem(item) {
 		const container = this.querySelector('ion-reorder-group');
 		const numberOfItems = container.children.length
-		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" id="${item.note_id}" checked="${item.checked}" order="${item.order}"></fridge-checkbox-list-item>`)
+		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" list_id="${item.list_id}" checked="${item.checked}" order="${item.order}"></fridge-checkbox-list-item>`)
 	}
 
 	buildHTML() {

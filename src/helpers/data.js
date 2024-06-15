@@ -38,15 +38,15 @@ export const getCheckedListItems = async () => {
 }
 
 export const setListItemCheckedStatus = async (id, checkedStatus) => {
-	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ checked: checkedStatus }).eq("id", id)
+	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ checked: checkedStatus }).eq("list_id", id)
 }
 
 export const setListItemName = async (id, text) => {
-	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ text }).eq("id", id)
+	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ text }).eq("list_id", id)
 }
 
 export const setListItemOrder = async (id, order) => {
-	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ order }).eq("id", id)
+	const { data: updatedListItem, error: listItemError } = await supabase.from("list_items").update({ order }).eq("list_id", id)
 }
 
 export const setListItem = async (listItem) => {
@@ -59,9 +59,9 @@ export const setListItem = async (listItem) => {
 }
 
 export const deleteListItem = async (id) => {
-	const { data: deletedListItem, error: listItemError } = await supabase.from("list_items").delete().eq("id", id)
+	const { data: deletedListItem, error: listItemError } = await supabase.from("list_items").delete().eq("list_id", id)
 }
 
 export const deleteListItems = async (ids) => {
-	const { data: deletedListItems, error: listItemError } = await supabase.from("list_items").delete().in("id", ids)
+	const { data: deletedListItems, error: listItemError } = await supabase.from("list_items").delete().in("list_id", ids)
 }
