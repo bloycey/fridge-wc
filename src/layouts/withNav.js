@@ -3,5 +3,5 @@ export const withNav = contents => /*html*/`
 		${contents}
 	</div>
 	<div class="h-16"></div>
-	<fridge-main-nav></fridge-main-nav>
+	<fridge-main-nav id="main-nav"></fridge-main-nav>
 `

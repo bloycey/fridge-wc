@@ -6,16 +6,37 @@ import { loadFromCache, watchForChanges, unwatch } from "../helpers/cache";
 export default class Lists extends HTMLElement {
 	constructor() {
 		super();
-		loadFromCache(this)
 		this.buildHTML();
 	}
 
 	connectedCallback() {
-		watchForChanges(this)
 		supabase
 			.channel('shopping-list')
 			.on('postgres_changes', { event: '*', schema: 'public', table: 'list_items' }, payload => {
 				console.log('Change received!', payload)
+				if (payload.eventType === "INSERT") {
+					const existingItem = this.querySelector("fridge-checkbox-list-item[list_id='" + payload.new.list_id + "']")
+					if (!existingItem) {
+						this.querySelector("#shopping-list").addItem(payload.new)
+					}
+				}
+				if (payload.eventType === "UPDATE") {
+					const existingItem = this.querySelector("fridge-checkbox-list-item[list_id='" + payload.new.list_id + "']")
+					if (existingItem) {
+						const markedAsChecked = payload.old.checked === false && payload.new.checked === true
+						const markedAsUnchecked = payload.old.checked === true && payload.new.checked === false
+						const nameChanged = payload.old.text !== payload.new.text
+						if (markedAsChecked) {
+							existingItem.markAsChecked()
+						} else if (markedAsUnchecked) {
+							existingItem.markAsUnchecked()
+						} else if (nameChanged) {
+							existingItem.text = payload.new.text
+						}
+					}
+					// TODO: handle order changes
+					// TODO: handle delete
+				}
 			})
 			.subscribe()
 		const clearCompletedBtn = this.querySelector(".clear-completed-btn")

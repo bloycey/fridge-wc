@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { setListItem, getListItemsCount, setListItemOrder } from "../../helpers/data";
+import { setListItem, setListItemOrder } from "../../helpers/data";
 
 export default class AddToList extends HTMLElement {
 	constructor() {

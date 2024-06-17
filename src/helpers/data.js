@@ -19,9 +19,9 @@ export const getUserData = async () => {
 	}
 }
 
-export const getListItemsCount = async () => {
+export const getCurrentListItemsCount = async () => {
 	const householdData = getHouseholdData();
-	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id)
+	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id).eq("checked", false)
 	return listItems.length;
 }
 

@@ -1,7 +1,7 @@
 import { setListItem, setListItemCheckedStatus, setListItemName, setListItemOrder, deleteListItem } from "../../helpers/data";
 
 export default class CheckboxListItem extends HTMLElement {
-	static observedAttributes = ["value", "order"];
+	static observedAttributes = ["text", "order"];
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (name === "text") {
@@ -17,20 +17,12 @@ export default class CheckboxListItem extends HTMLElement {
 	connectedCallback() {
 		const checkbox = this.querySelector('ion-checkbox');
 		const textInput = this.querySelector('ion-input');
-		const currentList = document.querySelector("#shopping-list")
-		const recentList = document.querySelector("#shopping-list-recent")
 		const deleteBtn = this.querySelector(".remove-item")
 		checkbox.addEventListener('ionChange', (event) => {
 			if (event.detail.checked) {
-				setListItemCheckedStatus(this.list_id, true)
-				this.checked = true
-				recentList.addItem(this)
-				this.remove()
+				this.markAsChecked()
 			} else {
-				setListItemCheckedStatus(this.list_id, false)
-				this.checked = false
-				currentList.addItem(this)
-				this.remove()
+				this.markAsUnchecked()
 			}
 		});
 		textInput.addEventListener('ionInput', (event) => {
@@ -42,6 +34,22 @@ export default class CheckboxListItem extends HTMLElement {
 				this.delete()
 			})
 		}
+	}
+
+	markAsChecked() {
+		const recentList = document.querySelector("#shopping-list-recent")
+		setListItemCheckedStatus(this.list_id, true)
+		this.checked = true
+		recentList.addItem(this)
+		this.remove()
+	}
+
+	markAsUnchecked() {
+		const currentList = document.querySelector("#shopping-list")
+		setListItemCheckedStatus(this.list_id, false)
+		this.checked = false
+		currentList.addItem(this)
+		this.remove()
 	}
 
 	delete() {
@@ -72,6 +80,10 @@ export default class CheckboxListItem extends HTMLElement {
 
 	get text() {
 		return this.getAttribute("text") || "";
+	}
+
+	set text(value) {
+		this.setAttribute("text", value);
 	}
 
 	get order() {
