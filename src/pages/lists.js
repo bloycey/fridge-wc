@@ -18,17 +18,20 @@ export default class Lists extends HTMLElement {
 					const existingItem = this.querySelector("fridge-checkbox-list-item[list_id='" + payload.new.list_id + "']")
 					if (!existingItem) {
 						this.querySelector("#shopping-list").addItem(payload.new)
+						// counter.increment()
 					}
 				}
 				if (payload.eventType === "UPDATE") {
 					const existingItem = this.querySelector("fridge-checkbox-list-item[list_id='" + payload.new.list_id + "']")
 					if (existingItem) {
 						const markedAsChecked = payload.old.checked === false && payload.new.checked === true
+						const isNewMarkedAsChecked = existingItem.checked === "false"
 						const markedAsUnchecked = payload.old.checked === true && payload.new.checked === false
+						const isNewMakredAsUnchecked = existingItem.checked === "true"
 						const nameChanged = payload.old.text !== payload.new.text
-						if (markedAsChecked) {
+						if (markedAsChecked && isNewMarkedAsChecked) {
 							existingItem.markAsChecked()
-						} else if (markedAsUnchecked) {
+						} else if (markedAsUnchecked && isNewMakredAsUnchecked) {
 							existingItem.markAsUnchecked()
 						} else if (nameChanged) {
 							existingItem.text = payload.new.text
@@ -78,10 +81,10 @@ export default class Lists extends HTMLElement {
 		const shoppingList = this.querySelector("#shopping-list")
 		const recentList = this.querySelector("#shopping-list-recent")
 		currentItems.forEach(item => {
-			shoppingList.addItem(item)
+			shoppingList.addItem(item, false)
 		})
 		recentItems.forEach(item => {
-			recentList.addItem(item)
+			recentList.addItem(item, false)
 		})
 	}
 }
