@@ -8,23 +8,6 @@ export default class InviteFamily extends HTMLElement {
 
 	connectedCallback() {
 		this.buildHTML();
-		const form = this.querySelector("#send-invite");
-		const modal = this.querySelector("#invite-family-modal");
-		const emailInput = this.querySelector("#invite-link");
-		const sendInviteBtn = this.querySelector("#send-invite-btn");
-		const membersList = document.querySelector('fridge-members');
-
-		// TODO: Remove event listener on disconnect
-		sendInviteBtn.addEventListener("click", async (e) => {
-			e.preventDefault();
-			const email = emailInput.value;
-			const { data, error } = await supabase.from("invitations").insert({ invited: email, invited_by: this.userData.id }).select()
-
-			sendInviteBtn.reset();
-			form.reset();
-			modal.closeModal();
-			membersList.buildHTML();
-		})
 	}
 
 	async buildHTML() {
@@ -45,6 +28,24 @@ export default class InviteFamily extends HTMLElement {
 				</form>
 			</div>
 		</zap-modal>`
+
+		const form = this.querySelector("#send-invite");
+		const modal = this.querySelector("#invite-family-modal");
+		const emailInput = this.querySelector("#invite-link");
+		const sendInviteBtn = this.querySelector("#send-invite-btn");
+		const membersList = document.querySelector('fridge-members');
+
+		// TODO: Remove event listener on disconnect
+		sendInviteBtn.addEventListener("click", async (e) => {
+			e.preventDefault();
+			const email = emailInput.value;
+			const { data, error } = await supabase.from("invitations").insert({ invited: email, invited_by: this.userData.user_id }).select()
+
+			sendInviteBtn.reset();
+			form.reset();
+			modal.closeModal();
+			membersList.buildHTML();
+		})
 	}
 }
 

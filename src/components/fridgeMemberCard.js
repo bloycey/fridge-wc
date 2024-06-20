@@ -46,7 +46,7 @@ export default class FridgeMemberCard extends HTMLElement {
 			const removeUserBtn = this.querySelector("[data-remove-user-btn]");
 			const removeUserModal = this.querySelector("#remove-user-modal");
 			removeUserBtn.addEventListener("click", async () => {
-				const { data, error } = await supabase.from("invitations").delete().eq("invited", this.email).eq("invited_by", this.userData.id).select();
+				const { data, error } = await supabase.from("invitations").delete().eq("invited", this.email).eq("invited_by", this.userData.user_id).select();
 				this.remove();
 			})
 		}

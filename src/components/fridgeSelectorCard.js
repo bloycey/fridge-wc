@@ -27,7 +27,7 @@ export default class FridgeSelectorCard extends HTMLElement {
 	async buildHTML() {
 		this.userData = await getUserData();
 		const { data: fridgeData, error: fridgeError } = await supabase.from("households").select().eq('id', this.householdId).single();
-		const ownerMessage = fridgeData.id === this.userData.id ? "You are the admin." : `${fridgeData.ownerName} is admin.`;
+		const ownerMessage = fridgeData.id === this.userData.user_id ? "You are the admin." : `${fridgeData.ownerName} is admin.`;
 
 		this.innerHTML = /*html*/ `
 			<li class="bg-light-green rounded-md p-4 cursor-pointer" role="button">

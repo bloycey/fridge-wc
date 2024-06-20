@@ -14,7 +14,8 @@ export default class FridgeMembers extends HTMLElement {
 
 	async buildHTML() {
 		this.userData = await getUserData();
-		const { data: invitationData, error: invitationError } = await supabase.from("invitations").select().eq('invited_by', this.userData.id);
+		console.log(this.userData)
+		const { data: invitationData, error: invitationError } = await supabase.from("invitations").select().eq('invited_by', this.userData.user_id);
 		if (invitationError) {
 			console.error(invitationError)
 			return;
