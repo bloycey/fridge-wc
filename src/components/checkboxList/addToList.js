@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { setListItem, setListItemOrder } from "../../helpers/data";
+import { setListItem, setListItemOrder, getCurrentListItemsCount } from "../../helpers/data";
+import Base from "../../components/base"
 
-export default class AddToList extends HTMLElement {
+export default class AddToList extends Base {
 	constructor() {
 		super();
 		this.buildHTML();
@@ -20,10 +21,14 @@ export default class AddToList extends HTMLElement {
 	async setListItemAndSetId(itemData) {
 		const uuid = uuidv4()
 		const shoppingList = document.querySelector("#shopping-list")
-		const container = shoppingList.querySelector('ion-reorder-group');
-		const numberOfItems = container.children.length
+		const container = shoppingList ? shoppingList.querySelector('ion-reorder-group') : null;
+		const numberOfItems = container ? container.children.length : await getCurrentListItemsCount()
 		const data = { ...itemData, checked: false, order: numberOfItems, list_id: uuid }
-		shoppingList.addItem(data)
+		if (shoppingList) {
+			shoppingList.addItem(data)
+		} else {
+			super.fireFlash(`Added ${data.text} to your shopping list`)
+		}
 		const newItem = await setListItem(data)
 	}
 

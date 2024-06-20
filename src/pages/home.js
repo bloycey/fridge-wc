@@ -10,6 +10,9 @@ export default class Home extends HTMLElement {
 	buildHTML() {
 		return withNav(/*html*/`
 				<fridge-settings-bar id="settings-bar"></fridge-settings-bar>
+				<div class="px-4 mt-8">
+					<fridge-add-to-list></fridge-add-to-list>
+				</div>
 			`)
 	}
 }

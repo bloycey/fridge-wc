@@ -103,7 +103,7 @@ export default class Lists extends Base {
 			const recentItemIds = recentItems.map(item => item.list_id)
 			recentItems.forEach(item => item.remove())
 			deleteListItems(recentItemIds)
-			super.fireFlash(`${recentItems.length} items cleared`);
+			super.fireFlash(`${recentItems.length} ${recentItems.length === 1 ? "item" : "items"} cleared`);
 		})
 	}
 }
