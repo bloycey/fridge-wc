@@ -1,4 +1,5 @@
 import { setListItem, setListItemCheckedStatus, setListItemName, setListItemOrder, deleteListItem } from "../../helpers/data";
+import { fireShoppingListEmojis } from "../../helpers/delight"
 
 export default class CheckboxListItem extends HTMLElement {
 	static observedAttributes = ["text", "order"];
@@ -44,6 +45,7 @@ export default class CheckboxListItem extends HTMLElement {
 		this.checked = true
 		recentList.addItem(this)
 		this.remove()
+		fireShoppingListEmojis(this.text)
 	}
 
 	markAsUnchecked() {

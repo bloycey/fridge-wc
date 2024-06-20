@@ -41,6 +41,12 @@ export default class Lists extends HTMLElement {
 					// TODO: handle order changes
 					// TODO: handle delete
 				}
+				if (payload.eventType === "DELETE") {
+					const existingItem = this.querySelector("fridge-checkbox-list-item[list_id='" + payload.old.list_id + "']")
+					if (existingItem) {
+						existingItem.remove()
+					}
+				}
 			})
 			.subscribe()
 	}
@@ -70,6 +76,7 @@ export default class Lists extends HTMLElement {
 							</template>
 						</fridge-accordion>
 					</section>
+
 				</div>
 		`)
 		const undefinedElements = this.querySelectorAll(":not(:defined)")
