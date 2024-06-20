@@ -31,8 +31,10 @@ export default class CheckboxList extends HTMLElement {
 			window.requestAnimationFrame(() => {
 				const newOrder = [...this.querySelector('ion-reorder-group').children].reverse()
 				newOrder.forEach((item, index) => {
-					item.order = index
-					setListItemOrder(item.list_id, index)
+					if (parseInt(item.order) !== index) {
+						item.order = index
+						setListItemOrder(item.list_id, index)
+					}
 				})
 			})
 		})

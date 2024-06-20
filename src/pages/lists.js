@@ -1,8 +1,9 @@
+import Base from "../components/base"
 import { supabase } from "../db/supabase";
 import { withNav } from "../layouts/withNav";
 import { setListItem, getListItems, deleteListItems } from "../helpers/data";
 
-export default class Lists extends HTMLElement {
+export default class Lists extends Base {
 	constructor() {
 		super();
 		const itemsFromCache = localStorage.getItem("FRIDGE_LIST_ITEMS")
@@ -76,7 +77,6 @@ export default class Lists extends HTMLElement {
 							</template>
 						</fridge-accordion>
 					</section>
-
 				</div>
 		`)
 		const undefinedElements = this.querySelectorAll(":not(:defined)")
@@ -102,6 +102,7 @@ export default class Lists extends HTMLElement {
 			const recentItemIds = recentItems.map(item => item.list_id)
 			recentItems.forEach(item => item.remove())
 			deleteListItems(recentItemIds)
+			super.fireFlash(`${recentItems.length} items cleared`);
 		})
 	}
 }

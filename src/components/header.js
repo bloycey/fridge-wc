@@ -1,7 +1,6 @@
 export default class Header extends HTMLElement {
 	static observedAttributes = ["top-text", "heading"];
 
-
 	attributeChangedCallback() {
 		this.buildHTML()
 	}

@@ -23,5 +23,5 @@
 -   https://supabase.com/blog/postgres-as-a-cron-server
 -   https://ionicframework.com/docs/api/reorder - Use this for shopping list and task list
 -   Shopping list - Multiplayer, empty states, loading states, total count in bottom menu (WIP), save accordion state in local
-- I think maybe I should cache data rather than component state.
-
+-   I think maybe I should cache data rather than component state.
+-   Can all elements extend from a BASE component?
