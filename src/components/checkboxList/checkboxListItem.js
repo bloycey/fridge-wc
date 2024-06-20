@@ -44,8 +44,10 @@ export default class CheckboxListItem extends HTMLElement {
 		setListItemCheckedStatus(this.list_id, true)
 		this.checked = true
 		recentList.addItem(this)
-		this.remove()
 		fireShoppingListEmojis(this.text)
+		setTimeout(() => {
+			this.remove()
+		}, 300)
 	}
 
 	markAsUnchecked() {
