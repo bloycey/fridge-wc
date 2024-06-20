@@ -28,9 +28,6 @@ export default class Header extends HTMLElement {
 				<p class="text-bright-pink uppercase text-sm font-bold leading-none">${this.topText}</p>
 				<h1 class="text-4xl">${this.heading}</h1>
 			</div>
-			<a href="/settings/" class="absolute top-6 right-6">
-				<heroicon-cog class-names="w-6 h-6 text-darkest-green"></heroicon-cog>
-			</a>
 		</div>`
 	}
 }

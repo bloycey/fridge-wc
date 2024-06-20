@@ -5,6 +5,7 @@ import { defineCustomElement as defineIonItem } from "@ionic/core/components/ion
 import { defineCustomElement as defineIonLabel } from "@ionic/core/components/ion-label.js";
 import { defineCustomElement as defineIonCheckbox } from "@ionic/core/components/ion-checkbox.js";
 import { defineCustomElement as defineIonInput } from "@ionic/core/components/ion-input.js";
+import { defineCustomElement as defineIonToggle } from "@ionic/core/components/ion-toggle.js";
 import { initialize } from "@ionic/core/components";
 
 initialize();
@@ -15,6 +16,7 @@ defineIonItem();
 defineIonLabel();
 defineIonCheckbox()
 defineIonInput();
+defineIonToggle();
 
 const pages = import.meta.glob("./pages/**/*.js")
 const components = import.meta.glob("./components/**/*.js")

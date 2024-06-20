@@ -65,3 +65,9 @@ export const deleteListItem = async (id) => {
 export const deleteListItems = async (ids) => {
 	const { data: deletedListItems, error: listItemError } = await supabase.from("list_items").delete().in("list_id", ids)
 }
+
+export const setListEmojiUsage = async (value) => {
+	const userData = await getUserData();
+	const { data: emojiUsage, error: emojiError } = await supabase.from("users").update({ list_emojis: value }).eq("user_id", userData.user_id).select().single()
+	localStorage.setItem("FRIDGE_USER", JSON.stringify(emojiUsage))
+}

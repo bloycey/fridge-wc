@@ -6,6 +6,7 @@
 	--darkest-green: #063732;
 	--dark-green: #08453f;
 	--green: #008073;
+	--medium-green: #bee4e0;
 	--lighter-green: #cceae7;
 	--light-green: #e2f3f1;
 	--lightest-green: #f8fcfb;
@@ -258,4 +259,16 @@ ion-checkbox {
 	--checkbox-background-checked: var(--lighter-green);
 	--checkmark-color: var(--dark-green);
 	--size: 20px;
+}
+
+ion-item.settings {
+	--ion-item-background: white;
+	--padding-start: 0;
+	--inner-padding-end: 0;
+}
+
+ion-toggle {
+	--handle-background-checked: var(--green);
+	--track-background: var(--medium-green);
+	--track-background-checked: var(--medium-green);
 }

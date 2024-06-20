@@ -61,6 +61,7 @@ export default class Lists extends Base {
 		this.innerHTML = withNav(/*html*/`
 				<div ${itemsFromCache ? "inert" : ""}>
 					<fridge-header top-text="Family" heading="Shopping List"></fridge-header>
+					<fridge-list-settings></fridge-list-settings>
 					<div class="mt-8 px-4">
 						<fridge-add-to-list></fridge-add-to-list>
 					</div>

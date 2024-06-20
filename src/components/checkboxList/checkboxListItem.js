@@ -1,4 +1,4 @@
-import { setListItem, setListItemCheckedStatus, setListItemName, setListItemOrder, deleteListItem } from "../../helpers/data";
+import { setListItem, setListItemCheckedStatus, setListItemName, setListItemOrder, deleteListItem, getUserData } from "../../helpers/data";
 import { fireShoppingListEmojis } from "../../helpers/delight"
 
 export default class CheckboxListItem extends HTMLElement {
@@ -37,17 +37,21 @@ export default class CheckboxListItem extends HTMLElement {
 		}
 	}
 
-	markAsChecked() {
+	async markAsChecked() {
 		const counter = document.querySelector("fridge-list-counter")
 		counter.decrement()
 		const recentList = document.querySelector("#shopping-list-recent")
 		setListItemCheckedStatus(this.list_id, true)
 		this.checked = true
 		recentList.addItem(this)
-		fireShoppingListEmojis(this.text)
 		setTimeout(() => {
 			this.remove()
 		}, 300)
+		const userData = await getUserData()
+		console.log(userData, userData.list_emojies, typeof userData.list_emojis)
+		if (userData.list_emojis === true) {
+			fireShoppingListEmojis(this.text)
+		}
 	}
 
 	markAsUnchecked() {
