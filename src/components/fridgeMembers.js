@@ -5,7 +5,6 @@ import { addToCache, loadFromCache } from "../helpers/cache";
 export default class FridgeMembers extends HTMLElement {
 	constructor() {
 		super();
-		loadFromCache(this);
 	}
 
 	connectedCallback() {
@@ -37,8 +36,6 @@ export default class FridgeMembers extends HTMLElement {
 				${emails.map(email => renderUserCard(email)).join("")}
 			</ul>
 		`
-
-		addToCache(this);
 	}
 }
 

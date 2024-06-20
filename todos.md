@@ -25,3 +25,5 @@
 -   Shopping list - Multiplayer, empty states, loading states, total count in bottom menu (WIP), save accordion state in local
 -   I think maybe I should cache data rather than component state.
 -   Can all elements extend from a BASE component?
+-   https://supabase.com/docs/guides/functions/examples/push-notifications?queryGroups=platform&platform=fcm
+-   Invite users using supabase platform: https://www.youtube.com/watch?v=51vzcGEmjRI

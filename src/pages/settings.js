@@ -11,6 +11,8 @@ export default class Settings extends HTMLElement {
 		signOutBtn.addEventListener("click", async () => {
 			localStorage.removeItem("FRIDGE_USER");
 			localStorage.removeItem("FRIDGE_HOUSEHOLD");
+			localStorage.removeItem("FRIDGE_LIST_ITEMS");
+			localStorage.removeItem("FRIDGE_LIST_ITEMS_COUNT");
 			await supabase.auth.signOut();
 			window.location.href = "/";
 		})

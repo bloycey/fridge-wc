@@ -18,10 +18,6 @@ export default class CheckboxList extends HTMLElement {
 			// when the drag started and ended, respectively
 			const from = event.detail.to
 			const to = event.detail.from
-			// const movedItem = event.target.querySelector(`fridge-checkbox-list-item[order="${from}"]`)
-
-			console.log('Dragged from index', from, 'to', to);
-
 			// console.log(event.target)
 			// Finish the reorder and position the item in the DOM based on
 			// where the gesture ended. This method can also be called directly

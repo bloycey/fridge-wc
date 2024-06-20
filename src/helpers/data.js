@@ -2,7 +2,23 @@
 
 import { supabase } from "../db/supabase";
 
-export const getHouseholdData = () => localStorage.getItem("FRIDGE_HOUSEHOLD") ? JSON.parse(localStorage.getItem("FRIDGE_HOUSEHOLD")) : "";
+export const getHouseholdData = async () => {
+	const localStorageValue = localStorage.getItem("FRIDGE_HOUSEHOLD");
+	if (localStorageValue) {
+		return JSON.parse(localStorageValue);
+	} else {
+		const userData = await getUserData();
+		const { data: householdData, error: householdError } = await supabase.from("households").select().eq("id", userData.activeHousehold).single()
+		if (householdData) {
+			localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(householdData))
+			return householdData;
+		}
+		if (householdError) {
+			console.error(householdError)
+		}
+	}
+
+}
 
 export const getUserData = async () => {
 	const localStorageValue = localStorage.getItem("FRIDGE_USER");
@@ -20,19 +36,26 @@ export const getUserData = async () => {
 }
 
 export const getCurrentListItemsCount = async () => {
-	const householdData = getHouseholdData();
+	const householdData = await getHouseholdData();
+	if (!householdData) {
+		return 0;
+	}
 	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id).eq("checked", false)
-	return listItems.length;
+	if (listItems) {
+		return listItems.length;
+	}
+
+	return 0
 }
 
 export const getListItems = async () => {
-	const householdData = getHouseholdData();
+	const householdData = await getHouseholdData();
 	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id)
 	return listItems;
 }
 
 export const getCheckedListItems = async () => {
-	const householdData = getHouseholdData();
+	const householdData = await getHouseholdData();
 	const { data: listItems, error: listError } = await supabase.from("list_items").select().eq("household", householdData.id).eq("checked", true)
 	return listItems;
 }
@@ -50,9 +73,10 @@ export const setListItemOrder = async (id, order) => {
 }
 
 export const setListItem = async (listItem) => {
+	const householdData = await getHouseholdData();
 	const dataToSubmit = {
 		...listItem,
-		household: getHouseholdData().id
+		household: householdData.id
 	}
 	const { data: createdListItem, error: listItemError } = await supabase.from("list_items").insert(dataToSubmit).select().single()
 	return createdListItem;

@@ -5,7 +5,6 @@ import { getHouseholdData, getUserData } from "../helpers/data";
 export default class FridgeName extends HTMLElement {
 	constructor() {
 		super();
-		this.householdData = getHouseholdData();
 	}
 
 	connectedCallback() {
@@ -13,6 +12,7 @@ export default class FridgeName extends HTMLElement {
 	}
 
 	async buildHTML() {
+		this.householdData = await getHouseholdData();
 		this.userData = await getUserData();
 		this.innerHTML = /*html*/ `
 		<label for="house-name">Your Fridge Name</label>

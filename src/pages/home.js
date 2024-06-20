@@ -13,7 +13,7 @@ export default class Home extends HTMLElement {
 				<div class="px-4 mt-8">
 					<fridge-add-to-list></fridge-add-to-list>
 				</div>
-			`)
+				`)
 	}
 }
 

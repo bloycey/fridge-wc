@@ -5,14 +5,14 @@ export default class ListCounter extends HTMLElement {
 
 	constructor() {
 		super();
-		if (localStorage.getItem("fridge-listItemsCount")) {
-			this.count = localStorage.getItem("fridge-listItemsCount")
+		if (localStorage.getItem("FRIDGE_LIST_ITEMS_COUNT")) {
+			this.count = localStorage.getItem("FRIDGE_LIST_ITEMS_COUNT")
 			this.buildHTML()
 		}
 	}
 
 	attributeChangedCallback() {
-		localStorage.setItem("fridge-listItemsCount", this.count)
+		localStorage.setItem("FRIDGE_LIST_ITEMS_COUNT", this.count)
 		this.buildHTML();
 	}
 
@@ -38,7 +38,7 @@ export default class ListCounter extends HTMLElement {
 
 	async getData() {
 		const listItemsCount = await getCurrentListItemsCount()
-		localStorage.setItem("fridge-listItemsCount", listItemsCount)
+		localStorage.setItem("FRIDGE_LIST_ITEMS_COUNT", listItemsCount)
 		this.count = listItemsCount
 		this.buildHTML(listItemsCount)
 	}

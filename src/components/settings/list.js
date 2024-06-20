@@ -21,7 +21,7 @@ export default class ListSettings extends HTMLElement {
 							<ion-toggle checked="${userData.list_emojis}" id="emoji">Emoji Mode 😮</ion-toggle>
 						</ion-item>
 						<ion-item class="settings">
-							<ion-toggle>Receive Notifications</ion-toggle>
+							<ion-toggle id="notifications-toggle">Receive Notifications</ion-toggle>
 						</ion-item>
 					</ion-list>
 				</div>
@@ -29,6 +29,15 @@ export default class ListSettings extends HTMLElement {
 		const emojiToggle = this.querySelector("#emoji");
 		emojiToggle.addEventListener("ionChange", async (event) => {
 			setListEmojiUsage(event.detail.checked)
+		})
+		const notificationsToggle = this.querySelector("#notifications-toggle");
+		notificationsToggle.addEventListener("ionChange", async (event) => {
+			if (event.detail.checked) {
+				const noficationRequest = await Notification.requestPermission();
+				if (noficationRequest === "granted") {
+					console.log("Notifications enabled")
+				}
+			}
 		})
 	}
 }

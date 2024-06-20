@@ -15,12 +15,10 @@ export default class Lists extends Base {
 		supabase
 			.channel('shopping-list')
 			.on('postgres_changes', { event: '*', schema: 'public', table: 'list_items' }, payload => {
-				console.log('Change received!', payload)
 				if (payload.eventType === "INSERT") {
 					const existingItem = this.querySelector("fridge-checkbox-list-item[list_id='" + payload.new.list_id + "']")
 					if (!existingItem) {
 						this.querySelector("#shopping-list").addItem(payload.new)
-						// counter.increment()
 					}
 				}
 				if (payload.eventType === "UPDATE") {
@@ -39,8 +37,6 @@ export default class Lists extends Base {
 							existingItem.text = payload.new.text
 						}
 					}
-					// TODO: handle order changes
-					// TODO: handle delete
 				}
 				if (payload.eventType === "DELETE") {
 					const existingItem = this.querySelector("fridge-checkbox-list-item[list_id='" + payload.old.list_id + "']")
@@ -55,8 +51,8 @@ export default class Lists extends Base {
 	async buildHTML(itemsFromCache) {
 		const items = itemsFromCache ? JSON.parse(itemsFromCache) : await getListItems()
 		localStorage.setItem("FRIDGE_LIST_ITEMS", JSON.stringify(items))
-		const currentItems = items.filter(item => !item.checked).sort((a, b) => a.order - b.order)
-		const recentItems = items.filter(item => item.checked)
+		const currentItems = items ? items.filter(item => !item.checked).sort((a, b) => a.order - b.order) : []
+		const recentItems = items ? items.filter(item => item.checked) : []
 
 		this.innerHTML = withNav(/*html*/`
 				<div ${itemsFromCache ? "inert" : ""}>
