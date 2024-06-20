@@ -39,7 +39,6 @@ export default class CheckboxListItem extends HTMLElement {
 	markAsChecked() {
 		const counter = document.querySelector("fridge-list-counter")
 		counter.decrement()
-		console.log("decrementing", counter)
 		const recentList = document.querySelector("#shopping-list-recent")
 		setListItemCheckedStatus(this.list_id, true)
 		this.checked = true
@@ -50,7 +49,6 @@ export default class CheckboxListItem extends HTMLElement {
 	markAsUnchecked() {
 		const counter = document.querySelector("fridge-list-counter")
 		counter.increment()
-		console.log("incrementing", counter)
 		const currentList = document.querySelector("#shopping-list")
 		setListItemCheckedStatus(this.list_id, false)
 		this.checked = false

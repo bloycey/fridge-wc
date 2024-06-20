@@ -1,15 +1,16 @@
 import { supabase } from "../db/supabase";
 import { withNav } from "../layouts/withNav";
 import { setListItem, getListItems, deleteListItems } from "../helpers/data";
-import { loadFromCache, watchForChanges, unwatch } from "../helpers/cache";
 
 export default class Lists extends HTMLElement {
 	constructor() {
 		super();
-		this.buildHTML();
+		const itemsFromCache = localStorage.getItem("FRIDGE_LIST_ITEMS")
+		this.buildHTML(itemsFromCache)
 	}
 
 	connectedCallback() {
+		this.buildHTML();
 		supabase
 			.channel('shopping-list')
 			.on('postgres_changes', { event: '*', schema: 'public', table: 'list_items' }, payload => {
@@ -42,20 +43,16 @@ export default class Lists extends HTMLElement {
 				}
 			})
 			.subscribe()
-		const clearCompletedBtn = this.querySelector(".clear-completed-btn")
-		clearCompletedBtn.addEventListener("click", async (e) => {
-			e.stopPropagation()
-			const recentItemsWrapper = this.querySelector("#shopping-list-recent")
-			const recentItems = [...recentItemsWrapper.querySelectorAll("fridge-checkbox-list-item")]
-			const recentItemIds = recentItems.map(item => item.list_id)
-			recentItems.forEach(item => item.remove())
-			deleteListItems(recentItemIds)
-		})
 	}
 
-	async buildHTML() {
+	async buildHTML(itemsFromCache) {
+		const items = itemsFromCache ? JSON.parse(itemsFromCache) : await getListItems()
+		localStorage.setItem("FRIDGE_LIST_ITEMS", JSON.stringify(items))
+		const currentItems = items.filter(item => !item.checked).sort((a, b) => a.order - b.order)
+		const recentItems = items.filter(item => item.checked)
+
 		this.innerHTML = withNav(/*html*/`
-				<div>
+				<div ${itemsFromCache ? "inert" : ""}>
 					<fridge-header top-text="Family" heading="Shopping List"></fridge-header>
 					<div class="mt-8 px-4">
 						<fridge-add-to-list></fridge-add-to-list>
@@ -75,16 +72,29 @@ export default class Lists extends HTMLElement {
 					</section>
 				</div>
 		`)
-		const items = await getListItems()
-		const currentItems = items.filter(item => !item.checked).sort((a, b) => a.order - b.order)
-		const recentItems = items.filter(item => item.checked)
+		const undefinedElements = this.querySelectorAll(":not(:defined)")
+		await Promise.all([...undefinedElements].map(el => customElements.whenDefined(el.localName)))
+
 		const shoppingList = this.querySelector("#shopping-list")
 		const recentList = this.querySelector("#shopping-list-recent")
+
 		currentItems.forEach(item => {
 			shoppingList.addItem(item, false)
 		})
+
 		recentItems.forEach(item => {
 			recentList.addItem(item, false)
+		})
+
+		const clearCompletedBtn = this.querySelector(".clear-completed-btn")
+		clearCompletedBtn.addEventListener("click", async (e) => {
+			console.log("clearing completed items")
+			e.stopPropagation()
+			const recentItemsWrapper = this.querySelector("#shopping-list-recent")
+			const recentItems = [...recentItemsWrapper.querySelectorAll("fridge-checkbox-list-item")]
+			const recentItemIds = recentItems.map(item => item.list_id)
+			recentItems.forEach(item => item.remove())
+			deleteListItems(recentItemIds)
 		})
 	}
 }

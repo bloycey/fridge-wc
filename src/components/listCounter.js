@@ -25,9 +25,7 @@ export default class ListCounter extends HTMLElement {
 	}
 
 	decrement() {
-		console.log("decrementing the component", this.count)
 		this.count = parseInt(this.count) - 1
-		console.log("decremented the component", this.count)
 	}
 
 	get count() {
@@ -46,7 +44,7 @@ export default class ListCounter extends HTMLElement {
 	}
 
 	buildHTML() {
-		this.innerHTML =  /*html*/ `<span class="size-4 flex items-center justify-center bg-bright-pink text-white rounded-full text-xs absolute z-50 top-1 right-4">${this.count}</span>`
+		this.innerHTML =  /*html*/ this.count > 0 ? `<span class="size-4 flex items-center justify-center bg-bright-pink text-white rounded-full text-xs absolute z-50 top-1 right-4">${this.count}</span>` : ""
 	}
 }
 
