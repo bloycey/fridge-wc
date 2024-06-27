@@ -1,7 +1,6 @@
 import { setListItemOrder } from "../../helpers/data";
-import { addToCache, loadFromCache, watchForChanges, unwatch } from "../../helpers/cache";
 
-export default class CheckboxList extends HTMLElement {
+export default class TaskList extends HTMLElement {
 	constructor() {
 		super();
 		this.buildHTML();
@@ -36,14 +35,15 @@ export default class CheckboxList extends HTMLElement {
 		})
 	}
 
-	addItem(item, updatesCounter = true) {
+	addTask(task, updatesCounter = true) {
 		const container = this.querySelector('ion-reorder-group');
 		const numberOfItems = container.children.length
-		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-checkbox-list-item text="${item.text}" list_id="${item.list_id}" id="${item.id}" checked="${item.checked}" order="${item.order}" read-only="${this.completed}"></fridge-checkbox-list-item>`)
-		const counter = document.querySelector("fridge-list-counter")
-		if (item.checked === false && updatesCounter) {
-			counter.increment()
-		}
+		console.log("Adding task", task)
+		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-task-item text="${task.name}" checked="${task.checked}" order="${task.order}" read-only="${this.completed}"></fridge-checkbox-list-item>`)
+		// const counter = document.querySelector("fridge-list-counter")
+		// if (item.checked === false && updatesCounter) {
+		// 	counter.increment()
+		// }
 	}
 
 	buildHTML() {
@@ -56,6 +56,6 @@ export default class CheckboxList extends HTMLElement {
 	}
 }
 
-if (!customElements.get("fridge-checkbox-list")) {
-	customElements.define("fridge-checkbox-list", CheckboxList);
+if (!customElements.get("fridge-task-list")) {
+	customElements.define("fridge-task-list", TaskList);
 }

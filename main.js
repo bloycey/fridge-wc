@@ -9,9 +9,6 @@ supabase.auth.onAuthStateChange((event, session) => {
 			const user = session.user
 			const userEmail = session.user.email;
 
-			console.log("user", user)
-			console.log("userEmail", userEmail)
-
 			setTimeout(async () => {
 				// Check if user exists
 				const { data, error } = await supabase.from("users").select().eq("email", userEmail)
@@ -33,15 +30,12 @@ supabase.auth.onAuthStateChange((event, session) => {
 						.from("households")
 						.insert({ name: `${user.user_metadata.name}'s Fridge`, ownerName: user.user_metadata.name }).select()
 
-					console.log("householdData", householdData)
-
 					localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(householdData))
 				} else {
 					const { data: currentHouseholdData, error: currentHouseholdError } = await supabase.from("households").select().eq('id', data[0].activeHousehold).single();
 					if (currentHouseholdError) {
 						console.error(currentHouseholdError)
 					} else {
-						console.log("currentHouseholdData", currentHouseholdData)
 						localStorage.setItem("FRIDGE_HOUSEHOLD", JSON.stringify(currentHouseholdData))
 					}
 

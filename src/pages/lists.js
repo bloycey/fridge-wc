@@ -76,6 +76,7 @@ export default class Lists extends Base {
 					</section>
 				</div>
 		`)
+
 		const undefinedElements = this.querySelectorAll(":not(:defined)")
 		await Promise.all([...undefinedElements].map(el => customElements.whenDefined(el.localName)))
 

@@ -17,7 +17,12 @@ export const getHouseholdData = async () => {
 			console.error(householdError)
 		}
 	}
+}
 
+export const getHouseholdMembers = async () => {
+	const householdData = await getHouseholdData();
+	const { data: members, error: membersError } = await supabase.from("users").select().eq("activeHousehold", householdData.id)
+	return members;
 }
 
 export const getUserData = async () => {
@@ -94,4 +99,15 @@ export const setListEmojiUsage = async (value) => {
 	const userData = await getUserData();
 	const { data: emojiUsage, error: emojiError } = await supabase.from("users").update({ list_emojis: value }).eq("user_id", userData.user_id).select().single()
 	localStorage.setItem("FRIDGE_USER", JSON.stringify(emojiUsage))
+}
+
+export const getTasks = async () => {
+	const householdData = await getHouseholdData();
+	const { data: tasks, error: tasksError } = await supabase.from("tasks").select().eq("household", householdData.id)
+	return tasks;
+}
+
+export const addTask = async (task) => {
+	const { data: createdTask, error: taskError } = await supabase.from("tasks").insert({ ...task }).select().single()
+	return createdTask;
 }
