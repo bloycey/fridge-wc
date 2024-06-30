@@ -82,12 +82,12 @@ export default class TaskItem extends HTMLElement {
 		this.setAttribute("checked", value);
 	}
 
-	get list_id() {
-		return this.getAttribute("list_id") || false;
+	get task_id() {
+		return this.getAttribute("task_id") || false;
 	}
 
-	set list_id(value) {
-		this.setAttribute("list_id", value);
+	set task_id(value) {
+		this.setAttribute("task_id", value);
 	}
 
 	get text() {

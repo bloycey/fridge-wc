@@ -111,3 +111,20 @@ export const addTask = async (task) => {
 	const { data: createdTask, error: taskError } = await supabase.from("tasks").insert({ ...task }).select().single()
 	return createdTask;
 }
+
+export const setTaskItemOrder = async (id, order) => {
+	const { data: updatedListItem, error: listItemError } = await supabase.from("tasks").update({ order }).eq("task_id", id)
+}
+
+export const getCurrentTaskItemsCount = async () => {
+	const householdData = await getHouseholdData();
+	if (!householdData) {
+		return 0;
+	}
+	const { data: listItems, error: listError } = await supabase.from("tasks").select().eq("household", householdData.id).eq("checked", false)
+	if (listItems) {
+		return listItems.length;
+	}
+
+	return 0
+}

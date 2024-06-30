@@ -1,4 +1,4 @@
-import { setListItemOrder } from "../../helpers/data";
+import { setTaskItemOrder } from "../../helpers/data";
 
 export default class TaskList extends HTMLElement {
 	constructor() {
@@ -28,7 +28,7 @@ export default class TaskList extends HTMLElement {
 				newOrder.forEach((item, index) => {
 					if (parseInt(item.order) !== index) {
 						item.order = index
-						setListItemOrder(item.list_id, index)
+						setTaskItemOrder(item.task_id, index)
 					}
 				})
 			})
@@ -39,7 +39,7 @@ export default class TaskList extends HTMLElement {
 		const container = this.querySelector('ion-reorder-group');
 		const numberOfItems = container.children.length
 		console.log("Adding task", task)
-		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-task-item text="${task.name}" checked="${task.checked}" order="${task.order}" read-only="${this.completed}"></fridge-checkbox-list-item>`)
+		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-task-item text="${task.name}" checked="${task.checked}" order="${task.order}" read-only="${this.completed}" task_id="${task.task_id}"></fridge-checkbox-list-item>`)
 		// const counter = document.querySelector("fridge-list-counter")
 		// if (item.checked === false && updatesCounter) {
 		// 	counter.increment()
