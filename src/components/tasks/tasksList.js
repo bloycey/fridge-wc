@@ -36,10 +36,11 @@ export default class TaskList extends HTMLElement {
 	}
 
 	addTask(task, updatesCounter = true) {
+		console.log("task", task)
 		const container = this.querySelector('ion-reorder-group');
 		const numberOfItems = container.children.length
 		console.log("Adding task", task)
-		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-task-item text="${task.name}" checked="${task.checked}" order="${task.order}" read-only="${this.completed}" task_id="${task.task_id}"></fridge-checkbox-list-item>`)
+		container.insertAdjacentHTML('afterbegin', /*html*/`<fridge-task-item text="${task.name}" checked="${task.checked}" assigned_to="${task.assigned_to}" order="${task.order}" read-only="${this.completed}" task_id="${task.task_id}"></fridge-checkbox-list-item>`)
 		// const counter = document.querySelector("fridge-list-counter")
 		// if (item.checked === false && updatesCounter) {
 		// 	counter.increment()

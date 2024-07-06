@@ -21,6 +21,7 @@
 -   Should await getUserData everywhere now
 -   Need to give a DB fallback for getHouseholdData too.
 -   https://supabase.com/blog/postgres-as-a-cron-server
+-   https://supabase.com/docs/guides/functions/schedule-functions
 -   https://ionicframework.com/docs/api/reorder - Use this for shopping list and task list
 -   Shopping list - Multiplayer, empty states, loading states, total count in bottom menu (WIP), save accordion state in local
 -   I think maybe I should cache data rather than component state.

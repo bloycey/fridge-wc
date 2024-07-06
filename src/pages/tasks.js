@@ -18,7 +18,6 @@ export default class Tasks extends HTMLElement {
 		const myTasks = tasks.filter(task => task.assigned_to === userData.user_id)
 		const sharedTasks = tasks.filter(task => task.shared === true)
 
-
 		localStorage.setItem("FRIDGE_TASKS", JSON.stringify(tasks))
 		this.innerHTML = withNav(/*html*/`
 				<div>

@@ -38,30 +38,32 @@ export default class TaskItem extends HTMLElement {
 	}
 
 	async markAsChecked() {
-		const counter = document.querySelector("fridge-list-counter")
-		counter.decrement()
-		const recentList = document.querySelector("#shopping-list-recent")
-		setListItemCheckedStatus(this.list_id, true)
-		this.checked = true
-		recentList.addItem(this)
-		setTimeout(() => {
-			this.remove()
-		}, 300)
-		const userData = await getUserData()
-		console.log(userData, userData.list_emojies, typeof userData.list_emojis)
-		if (userData.list_emojis === true) {
-			fireShoppingListEmojis(this.text)
-		}
+		console.log("marking as checked")
+		// const counter = document.querySelector("fridge-list-counter")
+		// counter.decrement()
+		// const recentList = document.querySelector("#shopping-list-recent")
+		// setListItemCheckedStatus(this.list_id, true)
+		// this.checked = true
+		// recentList.addItem(this)
+		// setTimeout(() => {
+		// 	this.remove()
+		// }, 300)
+		// const userData = await getUserData()
+		// console.log(userData, userData.list_emojies, typeof userData.list_emojis)
+		// if (userData.list_emojis === true) {
+		// 	fireShoppingListEmojis(this.text)
+		// }
 	}
 
 	markAsUnchecked() {
-		const counter = document.querySelector("fridge-list-counter")
-		counter.increment()
-		const currentList = document.querySelector("#shopping-list")
-		setListItemCheckedStatus(this.list_id, false)
-		this.checked = false
-		currentList.addItem(this)
-		this.remove()
+		console.log("marking as unchecked")
+		// const counter = document.querySelector("fridge-list-counter")
+		// counter.increment()
+		// const currentList = document.querySelector("#shopping-list")
+		// setListItemCheckedStatus(this.list_id, false)
+		// this.checked = false
+		// currentList.addItem(this)
+		// this.remove()
 	}
 
 	delete() {
