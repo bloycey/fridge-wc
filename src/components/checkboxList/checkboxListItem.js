@@ -16,62 +16,25 @@ export default class CheckboxListItem extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const checkbox = this.querySelector('ion-checkbox');
-		const textInput = this.querySelector('ion-input');
 		const deleteBtn = this.querySelector(".remove-item")
-		checkbox.addEventListener('ionChange', (event) => {
-			if (event.detail.checked) {
-				this.markAsChecked()
-			} else {
-				this.markAsUnchecked()
-			}
-		});
-		textInput.addEventListener('ionInput', (event) => {
-			setListItemName(this.list_id, event.detail.value)
-			this.value = event.detail.value
-		});
 		if (deleteBtn) {
 			deleteBtn.addEventListener("click", (e) => {
-				this.delete()
+				const event = new CustomEvent("delete-list-item", {
+					detail: {
+						id: this.list_id
+					}
+				})
+				document.dispatchEvent(event)
 			})
 		}
 	}
 
-	async markAsChecked() {
-		const counter = document.querySelector("fridge-list-counter")
-		counter.decrement()
-		const recentList = document.querySelector("#shopping-list-recent")
-		setListItemCheckedStatus(this.list_id, true)
-		this.checked = true
-		recentList.addItem(this)
-		setTimeout(() => {
-			this.remove()
-		}, 300)
-		const userData = await getUserData()
-		console.log(userData, userData.list_emojies, typeof userData.list_emojis)
-		if (userData.list_emojis === true) {
-			fireShoppingListEmojis(this.text)
-		}
-	}
-
-	markAsUnchecked() {
-		const counter = document.querySelector("fridge-list-counter")
-		counter.increment()
-		const currentList = document.querySelector("#shopping-list")
-		setListItemCheckedStatus(this.list_id, false)
-		this.checked = false
-		currentList.addItem(this)
-		this.remove()
-	}
-
-	delete() {
-		this.classList.add("hidden")
-		deleteListItem(this.list_id)
-		this.remove()
-	}
-
 	get readOnly() {
 		return this.getAttribute("read-only") || false;
+	}
+
+	set readOnly(value) {
+		return this.setAttribute("read-only", value);
 	}
 
 	get checked() {
@@ -109,7 +72,7 @@ export default class CheckboxListItem extends HTMLElement {
 	buildHTML() {
 		this.innerHTML = /*html*/`
 			<ion-item class="checkbox-list-item">
-				<ion-checkbox justify="start" label-placement="end" class="ml-4" checked="${this.checked}"></ion-checkbox>
+				<ion-checkbox justify="start" label-placement="end" class="ml-4" checked="${this.checked}" id="${this.list_id}"></ion-checkbox>
 				<ion-input value="${this.text}" debounce="500" class="ml-3 list-text header-font text-2xl text-darkest-green ${this.checked === "true" ? "line-through opacity-60" : ""}" disabled="${this.readOnly}"></ion-input>
 				<ion-reorder slot="end"></ion-reorder>
 				${this.readOnly === "true" ?
