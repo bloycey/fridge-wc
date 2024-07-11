@@ -8,29 +8,6 @@ export default class AddToList extends Base {
 		this.buildHTML();
 	}
 
-	connectedCallback() {
-		const addItemForm = this.querySelector("#add-item")
-		addItemForm.addEventListener("submit", async (e) => {
-			e.preventDefault()
-			const formData = Object.fromEntries(new FormData(addItemForm))
-			addItemForm.reset()
-			this.setListItemAndSetId(formData)
-		})
-	}
-
-	async setListItemAndSetId(itemData) {
-		const uuid = uuidv4()
-		const shoppingList = document.querySelector("#shopping-list")
-		const container = shoppingList ? shoppingList.querySelector('ion-reorder-group') : null;
-		const numberOfItems = container ? container.children.length : await getCurrentListItemsCount()
-		const data = { ...itemData, checked: false, order: numberOfItems, list_id: uuid }
-		if (shoppingList) {
-			shoppingList.addItem(data)
-		} else {
-			super.fireFlash(`Added ${data.text} to your shopping list`)
-		}
-		const newItem = await setListItem(data)
-	}
 
 	buildHTML() {
 		this.innerHTML = /*html*/`
