@@ -175,7 +175,6 @@ export default class Lists extends Base {
 	}
 
 	async markItemAsChecked(item) {
-		console.log("marking as checked", item)
 		this.counter.decrement()
 		setListItemCheckedStatus(item.list_id, true)
 		item.checked = true
@@ -188,7 +187,6 @@ export default class Lists extends Base {
 	}
 
 	markItemAsUnchecked(item) {
-		console.log("marking as unchecked", item)
 		this.counter.increment()
 		setListItemCheckedStatus(item.list_id, false)
 		item.checked = false
